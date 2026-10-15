@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Munnar Hiking Tours Website
 
-## Getting Started
+A complete, production-ready, mobile-first website for a Munnar trekking and hiking tour company. 
 
-First, run the development server:
+## Features
+
+- **Next.js App Router**: Optimized with Server Components, Server Actions, static generation, and ISR.
+- **Tailwind CSS v4**: Beautiful, custom-designed UI with modern styling.
+- **Supabase Integration**: PostgreSQL database for enquiries, tours, reviews, and a secure admin panel.
+- **Mobile-First Conversions**: Sticky WhatsApp buttons, click-to-call, and optimized booking forms.
+- **SEO & Performance**: Server-rendered metadata, semantic HTML, self-hosted fonts, high Lighthouse scores.
+
+## Setup Instructions
+
+### 1. Environment Variables
+
+Rename `.env.example` to `.env.local` and add your Supabase credentials.
+
+```bash
+cp .env.example .env.local
+```
+
+You'll need to set:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_WHATSAPP_NUMBER` (format: +919496520787)
+- `NEXT_PUBLIC_CONTACT_NUMBER` (format: +919496520787)
+
+### 2. Database Setup (Supabase)
+
+1. Create a new project in Supabase.
+2. Go to the SQL Editor.
+3. Copy the contents of `supabase/schema.sql` and run it. This will create all necessary tables and Row Level Security (RLS) policies.
+
+### 3. Installation
+
+Install all dependencies:
+
+```bash
+npm install
+```
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` to see the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push your code to a GitHub repository.
+2. Go to Vercel and import the repository.
+3. Add the Environment Variables (`NEXT_PUBLIC_SUPABASE_URL`, etc.) in the Vercel project settings.
+4. Deploy!
 
-## Learn More
+## Post-Launch SEO Checklist
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Connect Google Search Console and submit the sitemap (`/sitemap.xml`).
+- [ ] Connect Google Analytics 4 (GA4) for click tracking (add your tag id).
+- [ ] Create/Update Google Business Profile with consistent NAP (Name, Address, Phone).
+- [ ] Ensure all individual trek pages have unique H1s and Meta descriptions.
+- [ ] Share on social media and build local backlinks.
