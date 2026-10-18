@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Search, Mail, Bell, ChevronDown, Menu, CheckCircle, Clock, LogOut } from 'lucide-react';
+import { Search, Mail, Bell, ChevronDown, Menu, CheckCircle, Clock, LogOut, ArrowLeft } from 'lucide-react';
 import { useAdminStore } from '@/lib/adminData';
 import { supabase } from '@/lib/supabase';
 
@@ -29,7 +29,7 @@ export default function AdminTopNav({
   const handleLogout = async () => {
     await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
     await supabase.auth.signOut().catch(() => {});
-    window.location.href = '/admin/login';
+    window.location.replace('/admin/login');
   };
 
   const newEnquiriesCount = enquiries.filter(e => e.status === 'new').length;
@@ -50,6 +50,14 @@ export default function AdminTopNav({
         <h1 className="text-2xl md:text-3xl font-extrabold text-stone-900 tracking-tight">
           {title}
         </h1>
+        <Link
+          href="/"
+          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold transition-all border border-emerald-200 shadow-xs ml-2"
+          title="Return smoothly to Munnar Hiking Tours Homepage"
+        >
+          <ArrowLeft size={13} className="text-emerald-700" />
+          <span>Back to Website</span>
+        </Link>
       </div>
 
       {/* Center Search Bar */}
@@ -68,6 +76,15 @@ export default function AdminTopNav({
 
       {/* Right Action Icons & Admin Profile */}
       <div className="flex items-center gap-3 self-end sm:self-auto">
+        <Link
+          href="/"
+          className="sm:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold transition-all border border-emerald-200 shadow-xs"
+          title="Return smoothly to Munnar Hiking Tours Homepage"
+        >
+          <ArrowLeft size={13} className="text-emerald-700" />
+          <span>Website</span>
+        </Link>
+
         {/* Messages / Mail Icon */}
         <Link
           href="/admin/enquiries"
@@ -162,10 +179,10 @@ export default function AdminTopNav({
                 </Link>
                 <Link
                   href="/"
-                  target="_blank"
+                  onClick={() => setShowProfileMenu(false)}
                   className="block px-3 py-2 text-xs font-semibold text-stone-700 hover:bg-orange-50 hover:text-orange-600 rounded-xl transition-colors"
                 >
-                  View Public Website
+                  Back to Website
                 </Link>
                 <button
                   onClick={handleLogout}

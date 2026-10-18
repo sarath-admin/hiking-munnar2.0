@@ -207,6 +207,89 @@ const defaultProfile: AdminProfile = {
   totalBookings: 0,
 };
 
+// --- Default Sample Enquiries & LocalStorage Sync -----------------------------
+
+export const defaultEnquiries: Enquiry[] = [
+  {
+    id: 'enq-sample-1',
+    name: 'Ananya Sharma',
+    email: 'ananya.sharma@gmail.com',
+    phone: '+91 98452 11234',
+    destination: 'Kolukkumalai Sunrise Trek',
+    date: '2026-10-24',
+    travelers: 2,
+    budget: '₹4,500',
+    status: 'new',
+    createdAt: '2026-10-18',
+    message: 'Looking for a private jeep safari with sunrise guide pickup from Munnar town.',
+  },
+  {
+    id: 'enq-sample-2',
+    name: 'Rahul Verma',
+    email: 'rahul.verma@outlook.com',
+    phone: '+91 97412 88921',
+    destination: 'Meesapulimala Trekking Expedition',
+    date: '2026-10-26',
+    travelers: 4,
+    budget: '₹8,000',
+    status: 'contacted',
+    createdAt: '2026-10-17',
+    message: 'Need camping gear and packed breakfast for a 4-person group.',
+  },
+  {
+    id: 'enq-sample-3',
+    name: 'David Miller',
+    email: 'david.m@adventurehub.uk',
+    phone: '+44 7911 123456',
+    destination: 'Anakulam Elephant View Jeep Safari',
+    date: '2026-10-30',
+    travelers: 3,
+    budget: '₹6,000',
+    status: 'confirmed',
+    createdAt: '2026-10-16',
+    message: 'Family tour with photography stops at cardamom plantations and waterfalls.',
+  },
+  {
+    id: 'enq-sample-4',
+    name: 'Sneha Nair',
+    email: 'sneha.nair@yahoo.com',
+    phone: '+91 94471 55678',
+    destination: 'Top Station Ridge Trek',
+    date: '2026-11-02',
+    travelers: 2,
+    budget: '₹3,500',
+    status: 'new',
+    createdAt: '2026-10-18',
+    message: 'Can you arrange pick up from Chinnakanal resort around 5:30 AM?',
+  },
+];
+
+const ENQUIRIES_STORAGE_KEY = 'mht_admin_enquiries_v3';
+
+export function getStoredEnquiries(): Enquiry[] {
+  if (typeof window === 'undefined') return defaultEnquiries;
+  try {
+    const raw = localStorage.getItem(ENQUIRIES_STORAGE_KEY);
+    if (!raw) {
+      localStorage.setItem(ENQUIRIES_STORAGE_KEY, JSON.stringify(defaultEnquiries));
+      return defaultEnquiries;
+    }
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed : defaultEnquiries;
+  } catch {
+    return defaultEnquiries;
+  }
+}
+
+export function setStoredEnquiries(list: Enquiry[]) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(ENQUIRIES_STORAGE_KEY, JSON.stringify(list));
+  } catch (e) {
+    console.warn('[setStoredEnquiries]', e);
+  }
+}
+
 // --- Public helper (used by BookingForm) --------------------------------------
 
 export async function saveEnquiryToStore(
@@ -249,7 +332,12 @@ export async function saveEnquiryToStore(
       .maybeSingle();
 
     if (data) {
-      return mapEnquiry(data);
+      const saved = mapEnquiry(data);
+      if (typeof window !== 'undefined') {
+        const cur = getStoredEnquiries();
+        setStoredEnquiries([saved, ...cur.filter((e) => e.id !== saved.id)]);
+      }
+      return saved;
     }
 
     if (error) {
@@ -261,13 +349,18 @@ export async function saveEnquiryToStore(
     console.warn('[saveEnquiryToStore] Error:', err);
   }
 
+  if (typeof window !== 'undefined') {
+    const cur = getStoredEnquiries();
+    setStoredEnquiries([result, ...cur.filter((e) => e.id !== result.id)]);
+  }
+
   return result;
 }
 
 // --- Main Admin Hook ----------------------------------------------------------
 
 export function useAdminStore() {
-  const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
+  const [enquiries, setEnquiries] = useState<Enquiry[]>(() => getStoredEnquiries());
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [destinations, setDestinations] = useState<Destination[]>([]);
@@ -310,7 +403,23 @@ export function useAdminStore() {
         .select('*')
         .order('created_at', { ascending: false });
       if (enqErr) console.warn('[enquiries]', enqErr);
-      if (enqRows) setEnquiries(enqRows.map(mapEnquiry));
+      if (enqRows && enqRows.length > 0) {
+        const mapped = enqRows.map(mapEnquiry);
+        const local = getStoredEnquiries();
+        const mergedMap = new Map<string, Enquiry>();
+        mapped.forEach((item) => mergedMap.set(item.id, item));
+        local.forEach((item) => {
+          if (!mergedMap.has(item.id)) {
+            mergedMap.set(item.id, item);
+          }
+        });
+        const merged = Array.from(mergedMap.values());
+        setEnquiries(merged);
+        setStoredEnquiries(merged);
+      } else {
+        const local = getStoredEnquiries();
+        setEnquiries(local);
+      }
 
       const { data: bkRows, error: bkErr } = await supabase
         .from('bookings')
@@ -462,7 +571,11 @@ export function useAdminStore() {
 
       if (data) {
         const newEnq = mapEnquiry(data);
-        setEnquiries((prev) => [newEnq, ...prev.filter((e) => e.id !== newEnq.id)]);
+        setEnquiries((prev) => {
+          const updated = [newEnq, ...prev.filter((e) => e.id !== newEnq.id)];
+          setStoredEnquiries(updated);
+          return updated;
+        });
         return newEnq;
       }
 
@@ -475,7 +588,11 @@ export function useAdminStore() {
       console.warn('[addEnquiry] exception:', err);
     }
 
-    setEnquiries((prev) => [fallbackEnquiry, ...prev]);
+    setEnquiries((prev) => {
+      const updated = [fallbackEnquiry, ...prev.filter((e) => e.id !== fallbackEnquiry.id)];
+      setStoredEnquiries(updated);
+      return updated;
+    });
     return fallbackEnquiry;
   };
 
@@ -489,7 +606,11 @@ export function useAdminStore() {
     } catch (err) {
       console.warn('[updateEnquiryStatus]', err);
     }
-    setEnquiries((prev) => prev.map((e) => (e.id === id ? { ...e, status } : e)));
+    setEnquiries((prev) => {
+      const updated = prev.map((e) => (e.id === id ? { ...e, status } : e));
+      setStoredEnquiries(updated);
+      return updated;
+    });
   };
 
   const deleteEnquiry = async (id: string) => {
@@ -499,7 +620,11 @@ export function useAdminStore() {
     } catch (err) {
       console.warn('[deleteEnquiry]', err);
     }
-    setEnquiries((prev) => prev.filter((e) => e.id !== id));
+    setEnquiries((prev) => {
+      const updated = prev.filter((e) => e.id !== id);
+      setStoredEnquiries(updated);
+      return updated;
+    });
   };
 
   // -- Booking Actions --------------------------------------------------------

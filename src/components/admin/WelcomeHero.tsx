@@ -17,11 +17,11 @@ export default function WelcomeHero() {
         {/* Left Content */}
         <div className="md:col-span-7 lg:col-span-8 space-y-4">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-semibold text-yellow-200 uppercase tracking-wider">
-            <Sparkles size={13} className="text-yellow-300" /> Treker Admin Portal
+            <Sparkles size={13} className="text-yellow-300" /> Munnar Hiking Tours Admin
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-            HELLO <span className="text-yellow-300 drop-shadow-sm">TREKER</span>
+            HELLO <span className="text-yellow-300 drop-shadow-sm">EXPLORER</span>
             <br />
             <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold flex items-center gap-2 mt-1">
               Welcome to new world ✨

@@ -14,7 +14,8 @@ import {
   ChevronRight,
   Plane,
   ExternalLink,
-  LogOut
+  LogOut,
+  ArrowLeft
 } from 'lucide-react';
 import TrekerLogo from './TrekerLogo';
 
@@ -48,6 +49,21 @@ export default function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => 
 
         {/* Navigation Items */}
         <nav className="flex flex-col gap-1.5">
+          {/* Back to Public Website link */}
+          <Link
+            href="/"
+            onClick={onCloseMobile}
+            className="group flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-semibold text-emerald-300 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/25 transition-all duration-200 mb-2 shadow-xs"
+          >
+            <div className="flex items-center gap-3.5">
+              <ArrowLeft
+                size={18}
+                className="text-emerald-400 group-hover:-translate-x-1 transition-transform"
+              />
+              <span>Back to Website</span>
+            </div>
+          </Link>
+
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
@@ -84,7 +100,7 @@ export default function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => 
           <button
             onClick={async () => {
               await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
-              window.location.href = '/admin/login';
+              window.location.replace('/admin/login');
             }}
             className="group flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-stone-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-200 cursor-pointer w-full text-left mt-1"
           >
@@ -116,10 +132,10 @@ export default function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => 
               </p>
               <Link
                 href="/"
-                target="_blank"
+                onClick={onCloseMobile}
                 className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-bold text-white/90 hover:text-amber-300 transition-colors uppercase tracking-wider"
               >
-                Live Website <ExternalLink size={12} />
+                Go to Website <ExternalLink size={12} />
               </Link>
             </div>
           </div>

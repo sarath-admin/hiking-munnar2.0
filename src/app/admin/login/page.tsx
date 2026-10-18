@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 // ─── Inline SVGs for exact visual match to screenshot ────────────────────────
 function FacebookRoundIcon() {
@@ -109,8 +110,8 @@ export default function AdminLoginPage() {
         return;
       }
 
-      // Success path — redirect to admin panel
-      window.location.href = '/admin';
+      // Success path — replace history entry so back button smoothly returns to website
+      window.location.replace('/admin');
     } catch {
       setError('Network error. Please try again.');
       setShake(true);
@@ -136,6 +137,17 @@ export default function AdminLoginPage() {
         .shake-animation { animation: shake 0.5s ease-in-out; }
         .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
       `}</style>
+
+      {/* Top Left Return to Website Button */}
+      <div className="absolute top-5 left-5 z-20">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all border border-white/15 backdrop-blur-md shadow-lg"
+        >
+          <ArrowLeft size={14} />
+          <span>Back to Website</span>
+        </Link>
+      </div>
 
       {/* Decorative background geometry */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
@@ -254,6 +266,17 @@ export default function AdminLoginPage() {
               >
                 {loading ? 'AUTHENTICATING...' : 'ENTER'}
               </button>
+            </div>
+
+            {/* Direct Link to Homepage */}
+            <div className="pt-2 text-center">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-1.5 text-xs text-blue-200/70 hover:text-white transition-colors font-medium"
+              >
+                <ArrowLeft size={12} />
+                <span>Return to Homepage</span>
+              </Link>
             </div>
           </form>
         </div>

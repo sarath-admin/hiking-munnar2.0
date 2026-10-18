@@ -18,9 +18,14 @@ export default function TrekerLogo({ className = "h-8" }: { className?: string }
         </svg>
       </div>
 
-      <span className="font-extrabold text-2xl tracking-tight text-white font-sans">
-        Treker
-      </span>
+      <div className="flex flex-col">
+        <span className="font-extrabold text-base tracking-tight text-white leading-tight font-sans">
+          Munnar Hiking
+        </span>
+        <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400">
+          Admin Portal
+        </span>
+      </div>
     </div>
   );
 }
