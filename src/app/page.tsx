@@ -54,10 +54,9 @@ export default function Home() {
     // Top 3 from Design Reference
     { 
       title: 'Kolukkumalai Sunrise Trekking Adventure', 
-      slug: 'kolukkumalai-sunrise', 
+      slug: 'kolukkumalai-sunrise-jeep-safari', 
       duration: '3-6 Hours', 
       difficulty: 'Moderate', 
-      price: '₹1,500', 
       imageUrl: '/images/slide4.jpg', 
       category: 'JEEP SAFARIS', 
       description: 'Ride rugged 4x4 trails to witness the golden sunrise at the world\'s highest organic tea plantation...',
@@ -68,44 +67,43 @@ export default function Home() {
       slug: 'full-day-mountain-hiking', 
       duration: '5-8 Hours', 
       difficulty: 'Challenging', 
-      price: '₹2,500', 
       imageUrl: '/images/meesapulimala.png', 
       category: 'TREKKING', 
       description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot...',
       isPopular: true 
     },
     { 
-      title: 'Tea Plantation Walk with Sunset View', 
-      slug: 'tea-plantation-walk', 
-      duration: '2-4 Hours', 
+      title: 'Tea Factory Visit', 
+      slug: 'tea-factory-visit', 
+      duration: '2 Hours (10:00 AM – 12:00 PM)', 
       difficulty: 'Easy', 
-      price: '₹1,200', 
-      imageUrl: '/images/tea_walk.png', 
+      imageUrl: '/images/tea_factory_landscape.jpg', 
       category: 'TEA EXPERIENCES', 
-      description: 'Meander through private colonial trails, learn artisan plucking traditions, and enjoy freshly...',
+      description: 'From fresh leaves to your cup: explore authentic tea processing, withering, rolling, oxidation, grading & guided tea tasting.',
       isPopular: true 
     },
     
     // Other Jeep
-    { title: 'Off-Road Waterfall Safari', slug: 'waterfall-safari', duration: 'Half Day', difficulty: 'Easy', price: '₹2,500', imageUrl: '/images/safari_waterfall_v2.jpg', category: 'Jeep Safaris' },
-    { title: 'Kannan Devan Hills Safari', slug: 'hills-safari', duration: 'Full Day', difficulty: 'Easy', price: '₹3,500', imageUrl: '/images/safari_kannan_devan.jpg', category: 'Jeep Safaris' },
+    { title: 'Off-Road Waterfall Safari', slug: 'waterfall-safari', duration: 'Half Day', difficulty: 'Easy', imageUrl: '/images/safari_waterfall_v2.jpg', category: 'Jeep Safaris' },
+    { title: 'Kannan Devan Hills Safari', slug: 'kannan-devan-hills-jeep-safari', duration: 'Full Day', difficulty: 'Easy', imageUrl: '/images/kannan_devan_safari_landscape.jpg', category: 'Jeep Safaris' },
+    { title: 'Night Safari Adventure', slug: 'night-safari', duration: '3 Hours', difficulty: 'Easy', imageUrl: '/images/safari_night.jpg', category: 'Jeep Safaris' },
     // Other Trekking
-    { title: 'Letcmi Hills Trek', slug: 'letchmi-trek', duration: 'Half Day', difficulty: 'Moderate', price: '₹1,500', imageUrl: '/images/letchmi_trek.jpg', category: 'Trekking Adventure' },
-    { title: 'Anaimudi View Trek', slug: 'anaimudi-view', duration: 'Half Day', difficulty: 'Moderate', price: '₹1,800', imageUrl: '/images/anaimudi_view.jpg', category: 'Trekking Adventure' },
+    { title: 'Letcmi Hills Trek', slug: 'letchmi-trek', duration: 'Half Day', difficulty: 'Moderate', imageUrl: '/images/letchmi_trek.jpg', category: 'Trekking Adventure' },
+    { title: 'Anaimudi View Trek', slug: 'anaimudi-view', duration: 'Half Day', difficulty: 'Moderate', imageUrl: '/images/anaimudi_view.jpg', category: 'Trekking Adventure' },
     // Other Tea
-    { title: 'Factory Visit & Tasting', slug: 'tea-factory', duration: '2 Hours', difficulty: 'Easy', price: '₹800', imageUrl: '/images/tea_factory_tasting.jpg', category: 'Tea Experiences' },
-    { title: 'Plantation Picnic', slug: 'plantation-picnic', duration: 'Half Day', difficulty: 'Easy', price: '₹1,500', imageUrl: '/images/plantation_picnic.jpg', category: 'Tea Experiences' },
+    { title: 'Factory Visit & Tasting', slug: 'tea-factory', duration: '2 Hours', difficulty: 'Easy', imageUrl: '/images/tea_factory_tasting.jpg', category: 'Tea Experiences' },
+    { title: 'Plantation Picnic', slug: 'plantation-picnic', duration: 'Half Day', difficulty: 'Easy', imageUrl: '/images/plantation_picnic.jpg', category: 'Tea Experiences' },
     // Wildlife
-    { title: 'Eravikulam National Park', slug: 'eravikulam', duration: 'Half Day', difficulty: 'Easy', price: '₹1,500', imageUrl: '/images/eravikulam_national_park.jpg', category: 'Wildlife Sanctuaries' },
-    { title: 'Chinnar Wildlife Safari', slug: 'chinnar-safari', duration: 'Full Day', difficulty: 'Moderate', price: '₹3,000', imageUrl: '/images/safari_wildlife.jpg', category: 'Wildlife Sanctuaries' },
-    { title: 'Bird Watching Tour', slug: 'bird-watching', duration: 'Early Morning', difficulty: 'Easy', price: '₹1,200', imageUrl: '/images/bird_watching_tour.jpg', category: 'Wildlife Sanctuaries' },
+    { title: 'Eravikulam National Park', slug: 'eravikulam', duration: 'Half Day', difficulty: 'Easy', imageUrl: '/images/eravikulam_national_park.jpg', category: 'Wildlife Sanctuaries' },
+    { title: 'Chinnar Wildlife Safari', slug: 'chinnar-safari', duration: 'Full Day', difficulty: 'Moderate', imageUrl: '/images/safari_wildlife.jpg', category: 'Wildlife Sanctuaries' },
+    { title: 'Bird Watching Tour', slug: 'bird-watching', duration: 'Early Morning', difficulty: 'Easy', imageUrl: '/images/bird_watching_tour.jpg', category: 'Wildlife Sanctuaries' },
     // Sunrise Points
-    { title: 'Kolukkumalai Sunrise Point', slug: 'kolukkumalai-sunrise-point', duration: '3-5 Hours', difficulty: 'Easy-Mod', price: '₹1,500', imageUrl: '/images/kolukkumalai_sunrise_view.jpg', category: 'Sunrise Points' },
-    { title: 'Top Station Cloud Bed Sunrise', slug: 'top-station-sunrise', duration: '4 Hours', difficulty: 'Easy', price: '₹1,800', imageUrl: '/images/top_station_sunrise.jpg', category: 'Sunrise Points' },
+    { title: 'Kolukkumalai Sunrise Point', slug: 'kolukkumalai-sunrise-point', duration: '3-5 Hours', difficulty: 'Easy-Mod', imageUrl: '/images/kolukkumalai_sunrise_view.jpg', category: 'Sunrise Points' },
+    { title: 'Top Station Cloud Bed Sunrise', slug: 'top-station-sunrise', duration: '4 Hours', difficulty: 'Easy', imageUrl: '/images/top_station_sunrise.jpg', category: 'Sunrise Points' },
     // Heritage
-    { title: 'Old Munnar TukTuk Tour', slug: 'tuktuk-tour', duration: '3 Hours', difficulty: 'Easy', price: '₹1,000', imageUrl: '/images/old_munnar_tuktuk.jpg', category: 'Heritage & TukTuk' },
-    { title: 'Colonial Heritage Walk', slug: 'heritage-walk', duration: '2 Hours', difficulty: 'Easy', price: '₹800', imageUrl: '/images/colonial_heritage_walk.jpg', category: 'Heritage & TukTuk' },
-    { title: 'Spice Garden Visit', slug: 'spice-garden', duration: 'Half Day', difficulty: 'Easy', price: '₹1,500', imageUrl: '/images/spice_garden_visit.jpg', category: 'Heritage & TukTuk' },
+    { title: 'Old Munnar TukTuk Tour', slug: 'tuktuk-tour', duration: '3 Hours', difficulty: 'Easy', imageUrl: '/images/old_munnar_tuktuk.jpg', category: 'Heritage & TukTuk' },
+    { title: 'Colonial Heritage Walk', slug: 'heritage-walk', duration: '2 Hours', difficulty: 'Easy', imageUrl: '/images/colonial_heritage_walk.jpg', category: 'Heritage & TukTuk' },
+    { title: 'Spice Garden Visit', slug: 'spice-garden', duration: 'Half Day', difficulty: 'Easy', imageUrl: '/images/spice_garden_visit.jpg', category: 'Heritage & TukTuk' },
   ];
 
   const filteredTours = activeCategory === 'All Tours' 
@@ -268,13 +266,13 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredTours.map(trek => (
-              <TrekCard key={trek.slug} {...trek} />
+            {filteredTours.map((trek, idx) => (
+              <TrekCard key={`${trek.slug}-${idx}`} {...trek} />
             ))}
           </div>
           
           <div className="mt-12 text-center">
-            <Link href="/trekking" className="inline-flex items-center gap-2 text-[var(--color-primary)] font-bold border-b-2 border-[var(--color-primary)] pb-1 hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all">
+            <Link href="/tours" className="inline-flex items-center gap-2 text-[var(--color-primary-light)] font-bold border-b-2 border-[var(--color-primary-light)] pb-1 hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all">
               View All Tours <ArrowRight size={20} />
             </Link>
           </div>

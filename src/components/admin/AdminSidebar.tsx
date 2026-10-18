@@ -13,7 +13,8 @@ import {
   Settings, 
   ChevronRight,
   Plane,
-  ExternalLink
+  ExternalLink,
+  LogOut
 } from 'lucide-react';
 import TrekerLogo from './TrekerLogo';
 
@@ -78,6 +79,18 @@ export default function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => 
               </Link>
             );
           })}
+
+          {/* Log Out Button */}
+          <button
+            onClick={async () => {
+              await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+              window.location.href = '/admin/login';
+            }}
+            className="group flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-stone-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-200 cursor-pointer w-full text-left mt-1"
+          >
+            <LogOut size={20} className="text-stone-400 group-hover:text-red-400 transition-colors" />
+            <span>Log Out</span>
+          </button>
         </nav>
       </div>
 

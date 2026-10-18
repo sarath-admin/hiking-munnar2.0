@@ -20,63 +20,83 @@ const categories = Object.keys(categoryFilterMap);
 const tours = [
   {
     title: 'Kolukkumalai Sunrise Trekking Adventure',
+    slug: 'kolukkumalai-sunrise-jeep-safari',
     category: 'JEEP SAFARIS',
     duration: '3-6 Hours',
     difficulty: 'Moderate',
     description: 'Ride rugged 4x4 trails to witness the golden sunrise at the world\'s highest organic tea plantation...',
-    price: 'Custom Quote',
     imageUrl: '/images/kolukkumalai.png',
     isPopular: true
   },
   {
     title: 'Full Day Mountain Hiking in Munnar',
+    slug: 'full-day-mountain-hiking',
     category: 'TREKKING',
     duration: '5-8 Hours',
     difficulty: 'Challenging',
     description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot...',
-    price: 'Custom Quote',
     imageUrl: '/images/chokramudi.png',
     isPopular: false
   },
   {
     title: 'Tea Plantation Walk with Sunset View',
+    slug: 'tea-plantation-walk-sunset-view',
     category: 'TEA EXPERIENCES',
     duration: '2-4 Hours',
     difficulty: 'Easy',
     description: 'Meander through private colonial trails, learn artisan plucking traditions, and enjoy freshly...',
-    price: 'Custom Quote',
     imageUrl: '/images/tea_walk.png',
     isPopular: false
   },
   {
     title: 'Chinnar Wildlife & Valley View Tour',
+    slug: 'wildlife-sanctuary-tour',
     category: 'WILDLIFE',
     duration: '5 Hours',
     difficulty: 'Moderate',
     description: 'Journey to Munnar\'s dry-shadow wilderness to witness wild star tortoises, giant grizzled...',
-    price: 'Custom Quote',
     imageUrl: '/images/meesapulimala.png',
     isPopular: false
   },
   {
     title: 'Waterfall Sightseeing Adventure',
+    slug: 'waterfall-safari',
     category: 'WATERFALL TOURS',
     duration: '4 Hours',
     difficulty: 'Easy-Mod',
     description: 'Explore Munnar\'s most stunning cascading waterfalls, lush forest streams, and scenic riverbed trails with local guides...',
-    price: 'Custom Quote',
     imageUrl: '/images/slide2.jpg',
     isPopular: false
   },
   {
     title: 'Explore Munnar City on TukTuk',
+    slug: 'heritage-and-local-village-tour',
     category: 'SIGHTSEEING',
     duration: '4 Hours',
     difficulty: 'Easy',
     description: 'Whip through local spice markets, old colonial churches, artisanal chocolate kitchens, and...',
-    price: 'Custom Quote',
     imageUrl: '/images/tuktuk_munnar_tour.png',
     isPopular: false
+  },
+  {
+    title: 'Letcmi Hills Trek',
+    slug: 'letchmi-trek',
+    category: 'TREKKING',
+    duration: 'Half Day',
+    difficulty: 'Moderate',
+    description: 'Experience an unforgettable adventure with our certified guides on this Letcmi Hills Trek. Witness scenic mountain slopes...',
+    imageUrl: '/images/letchmi_trek.jpg',
+    isPopular: true
+  },
+  {
+    title: 'Anaimudi View Trek',
+    slug: 'anaimudi-view',
+    category: 'TREKKING',
+    duration: 'Half Day',
+    difficulty: 'Moderate',
+    description: 'Experience an unforgettable adventure with our certified guides on this Anaimudi View Trek. Witness South India\'s highest peak...',
+    imageUrl: '/images/anaimudi_view.jpg',
+    isPopular: true
   }
 ];
 

@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import WelcomeHero from '@/components/admin/WelcomeHero';
 import StatCards from '@/components/admin/StatCards';
@@ -11,19 +10,7 @@ import InteractiveCalendar from '@/components/admin/InteractiveCalendar';
 import AdminProfileCard from '@/components/admin/AdminProfileCard';
 
 export default function AdminDashboardPage() {
-  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
-  const [authed, setAuthed] = useState(false);
-
-  useEffect(() => {
-    if (sessionStorage.getItem('mht_admin_auth') !== '1') {
-      router.replace('/admin/login');
-    } else {
-      setAuthed(true);
-    }
-  }, [router]);
-
-  if (!authed) return null; // render nothing while redirecting
 
   return (
     <AdminLayout

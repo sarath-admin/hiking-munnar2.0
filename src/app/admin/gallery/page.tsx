@@ -30,6 +30,7 @@ export default function AdminGalleryPage() {
   // Upload form state
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [fileDataUrl, setFileDataUrl] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState('');
   const [fileSize, setFileSize] = useState('');
   const [fileDimensions, setFileDimensions] = useState('');
@@ -58,6 +59,7 @@ export default function AdminGalleryPage() {
     const sizeFormatted = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
     setFileSize(sizeFormatted);
     setFileName(file.name);
+    setSelectedFile(file);
 
     // Derive auto-title
     const cleanName = file.name
@@ -66,7 +68,7 @@ export default function AdminGalleryPage() {
       .replace(/\b\w/g, (c) => c.toUpperCase());
     setTitle(cleanName);
 
-    // Read full raw resolution without downscaling
+    // Preview only (base64 is NOT sent to Supabase — the real File is uploaded)
     const reader = new FileReader();
     reader.onload = (e) => {
       const resultUrl = e.target?.result as string;
@@ -76,7 +78,7 @@ export default function AdminGalleryPage() {
         // Detect original lossless pixel dimensions
         const imgObj = new window.Image();
         imgObj.onload = () => {
-          setFileDimensions(`${imgObj.naturalWidth} × ${imgObj.naturalHeight} px`);
+          setFileDimensions(`${imgObj.naturalWidth} \u00d7 ${imgObj.naturalHeight} px`);
         };
         imgObj.src = resultUrl;
       }
@@ -96,22 +98,29 @@ export default function AdminGalleryPage() {
       return;
     }
 
+    if (!selectedFile) {
+      alert('Please select an image file to upload.');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       await addItem({
         title: title.trim(),
         category,
-        imageUrl: fileDataUrl,
+        imageUrl: fileDataUrl ?? '',
         description: description.trim() || `High-resolution visual portrait of ${title.trim()} in Munnar.`,
         dimensions: fileDimensions || 'Original Full Resolution',
         fileSize,
         isVideo,
         videoUrl: isVideo ? videoUrl.trim() : undefined,
+        _file: selectedFile,
       });
 
-      setUploadSuccess(`"${title}" successfully added to Media Gallery!`);
+      setUploadSuccess(`"${title}" uploaded to Supabase and added to Gallery!`);
       // Reset form
       setFileDataUrl(null);
+      setSelectedFile(null);
       setFileName('');
       setTitle('');
       setDescription('');
@@ -121,9 +130,9 @@ export default function AdminGalleryPage() {
       setVideoUrl('');
       setShowUploadForm(false);
       setTimeout(() => setUploadSuccess(null), 4500);
-    } catch (err) {
-      console.error(err);
-      alert('Failed to save to gallery.');
+    } catch (err: any) {
+      console.error('[GalleryUploadError]', err);
+      alert(`Upload to Supabase failed: ${err?.message || 'Check the console for details.'}`);
     } finally {
       setIsSubmitting(false);
     }

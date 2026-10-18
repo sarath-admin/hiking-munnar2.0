@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Search, Mail, Bell, ChevronDown, Menu, CheckCircle, Clock, LogOut } from 'lucide-react';
 import { useAdminStore } from '@/lib/adminData';
+import { supabase } from '@/lib/supabase';
 
 interface AdminTopNavProps {
   title?: string;
@@ -25,9 +26,10 @@ export default function AdminTopNav({
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('mht_admin_auth');
-    router.push('/admin/login');
+  const handleLogout = async () => {
+    await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+    await supabase.auth.signOut().catch(() => {});
+    window.location.href = '/admin/login';
   };
 
   const newEnquiriesCount = enquiries.filter(e => e.status === 'new').length;
@@ -165,10 +167,25 @@ export default function AdminTopNav({
                 >
                   View Public Website
                 </Link>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left flex items-center gap-2 px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors cursor-pointer border-t border-stone-100 mt-1"
+                >
+                  <LogOut size={14} /> Log Out
+                </button>
               </div>
             </div>
           )}
         </div>
+
+        {/* Quick Log Out Action Button */}
+        <button
+          onClick={handleLogout}
+          className="p-2.5 rounded-full bg-stone-100 hover:bg-red-50 hover:text-red-600 text-stone-600 transition-colors cursor-pointer"
+          title="Log Out & Lock Admin Panel"
+        >
+          <LogOut size={18} />
+        </button>
       </div>
     </header>
   );

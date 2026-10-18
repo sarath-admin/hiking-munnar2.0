@@ -7,11 +7,12 @@ import { ArrowRight, ChevronLeft, ChevronRight, Clock, Pause, Play } from 'lucid
 
 export interface CarouselTour {
   title: string;
+  slug?: string;
   category: string;
   duration: string;
   difficulty: string;
   description: string;
-  price: string;
+  price?: string;
   imageUrl: string;
   isPopular: boolean;
 }
@@ -255,18 +256,15 @@ export default function RadialTourCarousel({ tours, autoplayMs = 5000 }: Props) 
                     <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 flex-grow">{tour.description}</p>
 
                     <div className="flex items-center justify-between pt-4 border-t border-gray-800 mt-auto">
-                      <div className="flex flex-col">
-                        <span className="text-[10px] text-gray-500 font-semibold tracking-wider uppercase mb-1">Pricing</span>
-                        <span className="text-lg font-bold text-[#e8a365] font-serif">{tour.price}</span>
-                      </div>
+                      <span className="text-xs text-gray-400 font-medium">Guided Trail Tour</span>
                       <Link
-                        href="/contact"
+                        href={`/tours/${tour.slug || 'kolukkumalai-sunrise-jeep-safari'}`}
                         tabIndex={isActive ? 0 : -1}
                         draggable={false}
                         onClick={(e) => { if (!isActive) e.preventDefault(); }}
                         className="flex items-center gap-2 bg-[#2d4a3e] hover:bg-[#3d5a4e] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-[#3d5a4e]"
                       >
-                        Reserve <ArrowRight size={16} />
+                        View Details <ArrowRight size={16} />
                       </Link>
                     </div>
                   </div>

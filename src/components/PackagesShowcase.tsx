@@ -1,159 +1,355 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { Eye, Clock, MapPin, Users, CheckCircle2, X, ZoomIn } from 'lucide-react';
+import { Clock, ChevronLeft, ChevronRight, Star, X, ZoomIn, ZoomOut, ExternalLink, Phone } from 'lucide-react';
 
+/* ─────────────────────────────────────────────────────────────
+   TYPES & DATA
+───────────────────────────────────────────────────────────── */
 export interface PackageItem {
   id: string;
   title: string;
-  category: 'trekking' | 'safari' | 'tea';
-  subtitle: string;
+  category: string;
+  categoryLabel: string;
   image: string;
-  distance: string;
-  time: string;
-  price: string;
-  minPersons: string;
-  altitude: string;
-  highlights: string[];
-  inclusions: string;
+  duration: string;
+  difficulty: string;
+  badge?: string;
+  description: string;
+  highlights?: string[];
 }
 
+const CATEGORIES = [
+  { key: 'all',      label: 'All Tours' },
+  { key: 'jeep',     label: 'Jeep Safaris' },
+  { key: 'trekking', label: 'Trekking Adventure' },
+  { key: 'tea',      label: 'Tea Experiences' },
+  { key: 'wildlife', label: 'Wildlife Sanctuaries' },
+  { key: 'sunrise',  label: 'Sunrise Points' },
+  { key: 'heritage', label: 'Heritage & TukTuk' },
+];
+
 export const TOUR_PACKAGES: PackageItem[] = [
+  /* ─── JEEP SAFARIS ─── */
+  {
+    id: 'kolukkumalai-jeep',
+    category: 'jeep',
+    categoryLabel: 'JEEP SAFARIS',
+    title: 'Kollumazhai Jeep Safari',
+    image: '/images/packages/kollumazhai_jeep_safari_hq.jpg',
+    duration: '04:00 AM – 12:00 PM',
+    difficulty: 'Moderate',
+    badge: 'MOST POPULAR',
+    description: "Witness breathtaking sunrise above the clouds, rugged mountain tracks, Kollumazhai village & tea factory visit.",
+    highlights: ['Sunrise above the clouds', 'Kollumazhai village & tea factory', '20-25 Kms off-road route', 'Breakfast, tea & guide included'],
+  },
+  {
+    id: 'anakulam-jeep-safari',
+    category: 'jeep',
+    categoryLabel: 'JEEP SAFARIS',
+    title: 'Anakulam Jeep Safari',
+    image: '/images/packages/anakulam_jeep_safari_hq.jpg',
+    duration: 'Full Day',
+    difficulty: 'Moderate',
+    badge: 'BEST SELLER',
+    description: 'Explore nature with off-road 4x4 adventure, hidden waterfalls and wild elephant spotting zones.',
+    highlights: ['Viripara & 33 waterfalls', 'Elephant watering spot', 'Spice plantation tour', 'Chocolate estate visit'],
+  },
+  {
+    id: 'kannan-devan-jeep',
+    category: 'jeep',
+    categoryLabel: 'JEEP SAFARIS',
+    title: 'Kannan Devan Hills Jeep Safari',
+    image: '/images/packages/kannan_devan_safari_full_hq.jpg',
+    duration: 'Full Day / Half Day',
+    difficulty: 'Moderate',
+    badge: 'NEW',
+    description: 'Scenic 12-stop 4x4 adventure across tea valleys, Idly Hills, Viripara Waterfalls, hanging bridge & Anakulam.',
+    highlights: ['Shooting Point & Idly Hills', 'Viripara & Forest Waterfalls', 'Tiger Cave & Hanging Bridge', 'River Crossing & Anakulam'],
+  },
+
+  /* ─── TREKKING ADVENTURE ─── */
+  {
+    id: 'full-day-mountain-hike',
+    category: 'trekking',
+    categoryLabel: 'TREKKING',
+    title: 'Full Day Mountain Hiking in Munnar',
+    image: '/images/packages/full_day_trekking_hq.jpg',
+    duration: '5-8 Hours',
+    difficulty: 'Challenging',
+    badge: 'MOST POPULAR',
+    description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot rare Neelakurinji blooms.',
+    highlights: ['Summit climb to 2100m', 'Native shola forest crossing', 'Homemade breakfast & lunch', 'Local expert guide'],
+  },
   {
     id: 'sunrise-trekking',
     category: 'trekking',
-    title: 'Sun Rise Trekking',
-    subtitle: 'Chase the sun. Feel the magic above the clouds.',
+    categoryLabel: 'TREKKING',
+    title: 'Sun Rise Trekking Adventure',
     image: '/images/packages/sunrise_trekking_hq.jpg',
-    distance: '10 Kms',
-    time: '05:30 AM – 11:30 AM',
-    price: '₹2,000 / Person',
-    minPersons: '4 Nos',
-    altitude: '2,400 Mtrs Peak',
-    highlights: ['Drive to base (1750m)', 'Golden sunrise view over cloud beds', 'Trek through high grasslands & rocks', 'Hot homemade mountain breakfast'],
-    inclusions: 'Food, Water, Guide and Jeep Transportation',
+    duration: '5-6 Hours',
+    difficulty: 'Moderate',
+    badge: 'BEST SELLER',
+    description: 'Chase the sun above the clouds. Trek high grasslands and feel the magic of a Munnar dawn.',
+    highlights: ['Golden sunrise at 2400m', 'Cloud sea panoramic views', 'High grassland trails', 'Hot mountain breakfast'],
   },
   {
     id: 'soft-hiking',
     category: 'trekking',
+    categoryLabel: 'TREKKING',
     title: 'Soft Hiking Tours',
-    subtitle: 'Walk gently. Explore deeply. Feel Munnar.',
     image: '/images/packages/soft_hiking_hq.jpg',
-    distance: '6 Kms (Easy Walk)',
-    time: '10:00 AM – 01:00 PM',
-    price: '₹800 / Person',
-    minPersons: '2 Nos',
-    altitude: '1,850 Mtrs Summit',
-    highlights: ['Gentle slopes & tea plantation walk', 'Scenic rolling grasslands & rock points', 'Mountain top snack break', 'Ideal for families, couples & beginners'],
-    inclusions: 'Snacks, Expert Local Guide, Water, Forest Entry Pass',
+    duration: '3 Hours',
+    difficulty: 'Easy',
+    description: 'Walk gently, explore deeply. Ideal for families, couples and beginners seeking Munnar\'s rolling hills.',
+    highlights: ['Tea plantation walk', 'Scenic grassland ridges', 'Mountain top snack break', 'Suitable for all ages'],
   },
   {
     id: 'half-day-trekking',
     category: 'trekking',
+    categoryLabel: 'TREKKING',
     title: 'Half Day Trekking & Hiking',
-    subtitle: 'Explore the beauty of Munnar with our guided half-day adventure.',
     image: '/images/packages/half_day_trekking_hq.jpg',
-    distance: '10 Kms',
-    time: '07:00 AM – 12:30 PM',
-    price: '₹1,000 / Person',
-    minPersons: '2 Nos',
-    altitude: '2,000 Mtrs Summit',
-    highlights: ['Ascend from 1550m to 2000m mountain top', 'Fresh homemade breakfast at summit', 'Pass through cardamom, coffee & tea estates', 'Return to Munnar by vehicle'],
-    inclusions: 'Homemade Breakfast, Guide, Water, Forest Entry Pass',
-  },
-  {
-    id: 'full-day-trekking',
-    category: 'trekking',
-    title: 'Full Day Trekking',
-    subtitle: 'A day of grand adventure, lush nature & lasting memories.',
-    image: '/images/packages/full_day_trekking_hq.jpg',
-    distance: '17 Kms',
-    time: '07:00 AM – 04:30 PM',
-    price: '₹2,000 / Person',
-    minPersons: '3 Nos',
-    altitude: '2,100 Mtrs Summit',
-    highlights: ['Summit climb (2100m) with breakfast', 'Native shola forest & spice plantations', 'Traditional homemade lunch at 1700m', 'Return to Munnar town by vehicle'],
-    inclusions: 'Breakfast, Lunch, Water, Expert Trekking Guide',
+    duration: '5.5 Hours',
+    difficulty: 'Moderate',
+    description: 'Ascend through cardamom, coffee & tea estates to a stunning 2000m summit with fresh homemade breakfast.',
+    highlights: ['1550m to 2000m ascent', 'Estate trail variety', 'Summit breakfast', 'Vehicle return'],
   },
   {
     id: 'grassland-hiking',
     category: 'trekking',
+    categoryLabel: 'TREKKING',
     title: 'Grass Land Hiking Tours',
-    subtitle: 'Walk through nature\'s purest beauty across Neelakurinji ridges & valleys.',
     image: '/images/packages/grassland_hiking_hq.jpg',
-    distance: '12 Kms',
-    time: '07:00 AM – 02:00 PM',
-    price: '₹1,800 / Person',
-    minPersons: '3 Nos',
-    altitude: '2,250 Mtrs Peak',
-    highlights: ['Drive to base (1550m)', 'Walk along expansive mountain grassland ridges', 'Summit top at 2250m with homemade food', 'Juice, fresh snacks and fruit stops'],
-    inclusions: 'Food (Homemade Breakfast), Guide, Water, Juice & Forest Pass',
+    duration: '7 Hours',
+    difficulty: 'Moderate',
+    description: "Walk through nature's purest beauty across Neelakurinji ridges & valleys at 2250m peak.",
+    highlights: ['Neelakurinji ridge walk', '2250m peak summit', 'Juice & snack stops', 'Homemade breakfast'],
   },
+
+  /* ─── TEA EXPERIENCES ─── */
   {
-    id: 'anakulam-jeep-safari',
-    category: 'safari',
-    title: 'Anakulam Jeep Safari',
-    subtitle: 'Explore nature. Feel the off-road adventure, waterfalls & wild elephant spots.',
-    image: '/images/packages/anakulam_jeep_safari_hq.jpg',
-    distance: 'Off-Road 4x4 Circuit',
-    time: 'Full Circuit Safari',
-    price: '₹5,000 / Jeep',
-    minPersons: '2 to 6 People',
-    altitude: 'Scenic Waterfalls & Jungle',
-    highlights: ['Kotta para hill view & Viripara waterfalls', 'Chocolate & spice plantation tour', 'Perambankuthu & 33 waterfalls with privacy trek', 'Anakulam elephant watering spot'],
-    inclusions: '4x4 Off-Road Jeep, Fuel, Certified Mountain Driver',
+    id: 'tea-factory-visit',
+    category: 'tea',
+    categoryLabel: 'TEA EXPERIENCES',
+    title: 'Tea Factory Visit',
+    image: '/images/packages/tea_factory_visit_hq.jpg',
+    duration: 'Approx. 2 Hours (10:00 AM – 12:00 PM)',
+    difficulty: 'Easy',
+    badge: 'MOST POPULAR',
+    description: 'From fresh leaves to your cup: observe withering, rolling, oxidation, drying, grading & enjoy a guided tea tasting.',
+    highlights: ['Complete tea factory tour', 'Fresh leaf rolling & drying', 'Guided authentic tea tasting', 'Factory shop visit'],
   },
   {
     id: 'tea-experience-program',
     category: 'tea',
+    categoryLabel: 'TEA EXPERIENCES',
     title: 'Tea Experience Program',
-    subtitle: 'Discover the complete journey of tea: Plantation • Factory • Tasting.',
     image: '/images/packages/tea_experience_hq.jpg',
-    distance: 'Guided Walk & Tasting',
-    time: '3½ – 4 Hours Total',
-    price: 'Special Experience',
-    minPersons: 'Solo, Couples & Families',
-    altitude: 'Nullatanni & Tea Valleys',
-    highlights: ['2-Hour guided walk through tea plantation', 'Step-by-step factory visit & machinery tour (45-60m)', 'Tea tasting session of grades & aroma (30m)', 'Learn artisan plucking from local planters'],
-    inclusions: 'Tea Plantation Guided Walk, Factory Entry Tour, Tea Tasting',
+    duration: '3.5-4 Hours',
+    difficulty: 'Easy',
+    description: 'Discover the complete journey of tea: Plantation • Factory • Tasting at Nullatanni Estate.',
+    highlights: ['Factory machinery tour', 'Grades & aroma tasting', 'Guided plantation walk', 'Expert commentary'],
   },
   {
     id: 'soft-hiking-tea-combo',
     category: 'tea',
+    categoryLabel: 'TEA EXPERIENCES',
     title: 'Soft Hiking & Tea Walk Combo',
-    subtitle: 'Experience the best of Munnar: Morning summit walk + colonial tea masterclass.',
     image: '/images/packages/tea_and_hiking_combo_hq.jpg',
-    distance: '6 Kms + Tea Estate',
-    time: 'Full Experience Program',
-    price: '₹800 / ₹1,500 Options',
-    minPersons: '2 Nos',
-    altitude: '1,850 Mtrs & Estate',
-    highlights: ['Program 1: 6km Soft Hiking Tour (Grassland & Rocks)', 'Program 2: Tea Plantation Walk + Factory + Tasting', 'Learn cultivation, grades, flavor notes', 'Authentic local experience with local guides'],
-    inclusions: 'Hike Guide, Snacks, Water, Factory Entry & Tea Tasting',
+    duration: 'Half Day',
+    difficulty: 'Easy',
+    badge: 'BEST VALUE',
+    description: 'Morning summit walk + colonial tea masterclass — the best of Munnar in a single unforgettable program.',
+    highlights: ['6km soft hike', 'Tea factory visit', 'Tasting session', 'Local guides throughout'],
+  },
+
+  /* ─── WILDLIFE SANCTUARIES ─── */
+  {
+    id: 'eravikulam-wildlife',
+    category: 'wildlife',
+    categoryLabel: 'WILDLIFE',
+    title: 'Eravikulam National Park Safari',
+    image: '/images/packages/grassland_hiking_hq.jpg',
+    duration: '3-4 Hours',
+    difficulty: 'Easy',
+    badge: 'MOST POPULAR',
+    description: 'Spot the endangered Nilgiri Tahr in their natural habitat at this UNESCO-listed high-altitude sanctuary.',
+    highlights: ['Nilgiri Tahr sightings', 'High-altitude grasslands', 'Expert naturalist guide', 'UNESCO heritage site'],
+  },
+  {
+    id: 'chinnar-wildlife',
+    category: 'wildlife',
+    categoryLabel: 'WILDLIFE',
+    title: 'Chinnar Wildlife Sanctuary Trek',
+    image: '/images/packages/anakulam_jeep_safari_hq.jpg',
+    duration: '5-6 Hours',
+    difficulty: 'Moderate',
+    description: "Explore Kerala's driest sanctuary with rare giant grizzled squirrels, elephants and star tortoises.",
+    highlights: ['Rare grizzled squirrel', 'Elephant corridors', 'Star tortoise habitat', 'River crossing trails'],
+  },
+
+  /* ─── SUNRISE POINTS ─── */
+  {
+    id: 'kolukkumalai-sunrise',
+    category: 'sunrise',
+    categoryLabel: 'SUNRISE POINTS',
+    title: "Kolukkumalai – World's Highest Tea Estate Sunrise",
+    image: '/images/packages/sunrise_trekking_hq.jpg',
+    duration: '4-5 Hours',
+    difficulty: 'Moderate',
+    badge: 'MOST POPULAR',
+    description: "Watch the sun rise over a 100-year-old colonial tea estate at 2100m — the world's highest organic tea garden.",
+    highlights: ['2100m altitude sunrise', 'Colonial tea estate', 'Cloud sea panorama', '4x4 jeep adventure'],
+  },
+  {
+    id: 'top-station-sunrise',
+    category: 'sunrise',
+    categoryLabel: 'SUNRISE POINTS',
+    title: 'Top Station Sunrise View Trek',
+    image: '/images/packages/grassland_hiking_hq.jpg',
+    duration: '3-4 Hours',
+    difficulty: 'Easy',
+    badge: 'SCENIC',
+    description: 'Stand at Kerala\'s highest motor road point and watch dawn break over the misty Kannan Devan Hills.',
+    highlights: ['Highest motor road point', 'Tamil Nadu border views', 'Mist-filled valleys', 'Photography perfect'],
+  },
+
+  /* ─── HERITAGE & TUKTUK ─── */
+  {
+    id: 'munnar-heritage-tuktuk',
+    category: 'heritage',
+    categoryLabel: 'HERITAGE & TUKTUK',
+    title: 'Munnar Heritage TukTuk Town Tour',
+    image: '/images/packages/soft_hiking_hq.jpg',
+    duration: '2-3 Hours',
+    difficulty: 'Easy',
+    badge: 'MOST POPULAR',
+    description: 'Zip through colonial-era bazaars, century-old churches and hidden tea bungalows on an iconic auto-rickshaw.',
+    highlights: ['Colonial bazaar streets', 'Old tea bungalow visit', 'Local spice markets', 'British-era church stops'],
+  },
+  {
+    id: 'estate-heritage-walk',
+    category: 'heritage',
+    categoryLabel: 'HERITAGE & TUKTUK',
+    title: 'British Estate Heritage Walk',
+    image: '/images/packages/tea_and_hiking_combo_hq.jpg',
+    duration: '3 Hours',
+    difficulty: 'Easy',
+    description: 'Walk through original British plantation bungalows, century-old factory ruins and colonial archives.',
+    highlights: ['Plantation bungalow tour', 'Factory ruins exploration', 'Colonial archive visit', 'Local history stories'],
   },
 ];
 
+/* ─────────────────────────────────────────────────────────────
+   COMPONENT
+───────────────────────────────────────────────────────────── */
 interface PackagesShowcaseProps {
   showTitle?: boolean;
   limit?: number;
 }
 
 export default function PackagesShowcase({ showTitle = true, limit }: PackagesShowcaseProps) {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'trekking' | 'safari' | 'tea'>('all');
-  const [selectedImage, setSelectedImage] = useState<PackageItem | null>(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [displayCategory, setDisplayCategory] = useState('all');
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animDir, setAnimDir] = useState<'left' | 'right'>('right');
+  const [selectedPkg, setSelectedPkg] = useState<PackageItem | null>(null);
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace('+', '') || '919496520787';
 
-  const filteredPackages = TOUR_PACKAGES.filter((pkg) => {
-    if (selectedCategory === 'all') return true;
-    return pkg.category === selectedCategory;
-  });
+  /* filtered packages based on displayCategory */
+  const filtered = TOUR_PACKAGES.filter(
+    (p) => displayCategory === 'all' || p.category === displayCategory,
+  );
+  const displayed = limit ? filtered.slice(0, limit) : filtered;
 
-  const displayedPackages = limit ? filteredPackages.slice(0, limit) : filteredPackages;
+  /* category switch with directional slide animation */
+  const switchCategory = useCallback(
+    (key: string) => {
+      if (key === activeCategory || isAnimating) return;
+      const currentIdx = CATEGORIES.findIndex((c) => c.key === activeCategory);
+      const nextIdx = CATEGORIES.findIndex((c) => c.key === key);
+      setAnimDir(nextIdx > currentIdx ? 'right' : 'left');
+      setIsAnimating(true);
+      setActiveCategory(key);
+
+      const tabEl = tabsRef.current?.querySelector(`[data-cat="${key}"]`) as HTMLElement | null;
+      tabEl?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+      setTimeout(() => {
+        setDisplayCategory(key);
+        setIsAnimating(false);
+        sliderRef.current?.scrollTo({ left: 0, behavior: 'smooth' });
+      }, 260);
+    },
+    [activeCategory, isAnimating],
+  );
+
+  const scrollSlider = (dir: 'left' | 'right') => {
+    if (!sliderRef.current) return;
+    const cardWidth = sliderRef.current.firstElementChild
+      ? (sliderRef.current.firstElementChild as HTMLElement).offsetWidth + 24
+      : 360;
+    sliderRef.current.scrollBy({ left: dir === 'right' ? cardWidth : -cardWidth, behavior: 'smooth' });
+  };
+
+  const openPackageModal = (pkg: PackageItem) => {
+    setSelectedPkg(pkg);
+    setZoomLevel(1);
+  };
+
+  const navigateModal = useCallback(
+    (direction: 'next' | 'prev') => {
+      if (!selectedPkg || displayed.length === 0) return;
+      const currentIndex = displayed.findIndex((p) => p.id === selectedPkg.id);
+      if (currentIndex === -1) return;
+      const nextIndex =
+        direction === 'next'
+          ? (currentIndex + 1) % displayed.length
+          : (currentIndex - 1 + displayed.length) % displayed.length;
+      setSelectedPkg(displayed[nextIndex]);
+      setZoomLevel(1);
+    },
+    [displayed, selectedPkg],
+  );
+
+  useEffect(() => {
+    document.body.style.overflow = selectedPkg ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedPkg]);
+
+  useEffect(() => {
+    if (!selectedPkg) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedPkg(null);
+        setZoomLevel(1);
+      } else if (e.key === 'ArrowRight') {
+        navigateModal('next');
+      } else if (e.key === 'ArrowLeft') {
+        navigateModal('prev');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedPkg, navigateModal]);
+
+  const difficultyColor = (d: string) => {
+    if (d === 'Easy') return 'text-emerald-400';
+    if (d === 'Challenging') return 'text-red-400';
+    return 'text-amber-400';
+  };
 
   return (
     <div className="w-full">
+      {/* SECTION HEADER */}
       {showTitle && (
-        <div className="text-center mb-10 md:mb-14">
+        <div className="text-center mb-10 md:mb-14 px-4">
           <span className="text-[#ff7700] font-bold tracking-widest uppercase text-xs md:text-sm bg-orange-500/10 px-4 py-1.5 rounded-full border border-orange-500/20 inline-block mb-3">
             Handcrafted Itineraries
           </span>
@@ -161,201 +357,336 @@ export default function PackagesShowcase({ showTitle = true, limit }: PackagesSh
             Tour Packages – Munnar
           </h2>
           <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-base md:text-lg">
-            High-quality guided adventures led by certified local trail experts. View our complete tour itineraries below and book instantly on WhatsApp.
+            High-quality guided adventures led by certified local trail experts. Browse by category and book instantly on WhatsApp.
           </p>
         </div>
       )}
 
-      {/* CATEGORY FILTER TABS */}
-      <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-10">
-        {[
-          { key: 'all', label: `All Packages (${TOUR_PACKAGES.length})` },
-          { key: 'trekking', label: `Trekking & Hiking (${TOUR_PACKAGES.filter(p => p.category === 'trekking').length})` },
-          { key: 'safari', label: `Jeep Safari (${TOUR_PACKAGES.filter(p => p.category === 'safari').length})` },
-          { key: 'tea', label: `Tea Experiences (${TOUR_PACKAGES.filter(p => p.category === 'tea').length})` },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setSelectedCategory(tab.key as any)}
-            className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-200 border ${
-              selectedCategory === tab.key
-                ? 'bg-emerald-600 text-white border-emerald-500 shadow-lg shadow-emerald-950/40'
-                : 'bg-zinc-900/80 text-gray-300 border-white/10 hover:border-white/20 hover:text-white'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+      {/* CATEGORY TABS */}
+      <div className="relative mb-8 px-4">
+        <div className="absolute left-4 top-0 bottom-0 w-8 bg-gradient-to-r from-[#081c15] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-4 top-0 bottom-0 w-8 bg-gradient-to-l from-[#081c15] to-transparent z-10 pointer-events-none" />
+        <div
+          ref={tabsRef}
+          className="flex items-center gap-2 overflow-x-auto px-2 pb-1"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.key}
+              data-cat={cat.key}
+              onClick={() => switchCategory(cat.key)}
+              className={`
+                flex-shrink-0 px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold
+                border transition-all duration-200 cursor-pointer whitespace-nowrap
+                ${activeCategory === cat.key
+                  ? 'bg-emerald-600 text-white border-emerald-500 shadow-lg shadow-emerald-950/50'
+                  : 'bg-zinc-900/80 text-gray-300 border-white/10 hover:border-white/25 hover:text-white hover:bg-zinc-800/80'
+                }
+              `}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* 2-COLUMN GRID — balanced, equal-width poster cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-        {displayedPackages.map((pkg, index) => {
-          const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-            `Hi! I would like to book the "${pkg.title}" package (${pkg.price}). Please share availability and details.`
-          )}`;
+      {/* SLIDER */}
+      <div className="relative">
+        {/* Prev arrow */}
+        <button
+          onClick={() => scrollSlider('left')}
+          aria-label="Scroll left"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-zinc-900/90 border border-white/15 text-white rounded-full p-2.5 shadow-xl hover:bg-emerald-700 hover:border-emerald-500 transition-all hidden md:flex items-center justify-center"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        {/* Next arrow */}
+        <button
+          onClick={() => scrollSlider('right')}
+          aria-label="Scroll right"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-zinc-900/90 border border-white/15 text-white rounded-full p-2.5 shadow-xl hover:bg-emerald-700 hover:border-emerald-500 transition-all hidden md:flex items-center justify-center"
+        >
+          <ChevronRight size={20} />
+        </button>
 
-          return (
-            <div
-              key={pkg.id}
-              className="group bg-zinc-900/90 rounded-3xl border border-white/10 hover:border-emerald-500/40 shadow-xl hover:shadow-2xl hover:shadow-emerald-950/30 transition-all duration-300 flex flex-col overflow-hidden"
-            >
-              {/* IMAGE POSTER PREVIEW — constrained, centered, equal-height */}
-              <div
-                className="relative cursor-pointer bg-zinc-800/60 px-4 pt-4 pb-2"
-                onClick={() => setSelectedImage(pkg)}
-              >
-                {/* Fixed-height poster container: 15-20% smaller than before */}
-                <div className="relative w-full" style={{ maxHeight: '560px', aspectRatio: '680 / 1024', margin: '0 auto', overflow: 'hidden' }}>
-                  <Image
-                    src={pkg.image}
-                    alt={pkg.title}
-                    width={680}
-                    height={1024}
-                    quality={95}
-                    priority={index < 2}
-                    className="w-full h-full object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.02]"
-                    style={{ display: 'block' }}
-                  />
-                </div>
+        <div
+          ref={sliderRef}
+          className="flex gap-6 overflow-x-auto px-6 pb-4 snap-x snap-mandatory scroll-smooth"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+        >
+          {/* Animated inner wrapper */}
+          <div
+            className="flex gap-6"
+            style={{
+              opacity: isAnimating ? 0 : 1,
+              transform: isAnimating
+                ? `translateX(${animDir === 'right' ? '48px' : '-48px'})`
+                : 'translateX(0px)',
+              transition: 'opacity 0.26s cubic-bezier(0.4,0,0.2,1), transform 0.26s cubic-bezier(0.4,0,0.2,1)',
+              minWidth: 'max-content',
+            }}
+          >
+            {displayed.map((pkg) => {
+              const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                `Hi! I would like to book the "${pkg.title}" package. Please share availability and details.`,
+              )}`;
 
-                {/* Hover overlay hint to view/zoom */}
-                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none rounded-t-3xl">
-                  <span className="bg-black/80 backdrop-blur-md text-white font-medium text-sm px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 shadow-lg">
-                    <ZoomIn size={16} className="text-emerald-400" />
-                    Click to view full poster
-                  </span>
-                </div>
-              </div>
+              return (
+                <div
+                  key={pkg.id}
+                  className="snap-start flex-shrink-0 w-[310px] sm:w-[350px] md:w-[380px] group bg-zinc-900 rounded-2xl border border-white/10 hover:border-emerald-500/50 shadow-xl hover:shadow-emerald-950/40 overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col"
+                  onClick={() => openPackageModal(pkg)}
+                >
+                  {/* CARD TOP LABEL BAR */}
+                  <div className="px-4 py-2.5 flex items-center justify-between border-b border-white/10 bg-zinc-950/80">
+                    <span className="text-[11px] font-bold tracking-widest uppercase text-emerald-400">
+                      {pkg.categoryLabel}
+                    </span>
+                    {pkg.badge && (
+                      <span className="bg-[#ff7700] text-white text-[10px] font-extrabold tracking-wider px-2.5 py-0.5 rounded-full uppercase shadow">
+                        {pkg.badge}
+                      </span>
+                    )}
+                  </div>
 
-              {/* CARD DETAILS & ACTION BAR */}
-              <div className="p-6 md:p-8 flex flex-col flex-grow justify-between bg-zinc-900/95 border-t border-white/10">
-                <div>
-                  <div className="flex items-center justify-between gap-4 mb-2">
-                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                  {/* FULL FLYER IMAGE CONTAINER - ASPECT 3:4 TO SHOW FULL UNCLIPPED PORTRAIT FLYER */}
+                  <div className="relative aspect-[3/4] w-full bg-zinc-950 overflow-hidden group/img flex items-center justify-center border-b border-white/5">
+                    <Image
+                      src={pkg.image}
+                      alt={`${pkg.title} - Full Official Tour Plan Flyer`}
+                      fill
+                      sizes="(max-width: 640px) 340px, 400px"
+                      quality={95}
+                      className="object-contain p-1 transition-transform duration-300 group-hover/img:scale-[1.02]"
+                    />
+
+                    {/* Subtle floating click/tap prompt pill that leaves flyer content fully visible */}
+                    <div className="absolute bottom-2.5 inset-x-0 flex justify-center pointer-events-none z-10">
+                      <div className="py-1 px-3 bg-black/80 hover:bg-black/90 backdrop-blur-md rounded-full border border-white/20 flex items-center gap-1.5 text-[11px] text-white font-medium shadow-lg transition-transform duration-200 group-hover/img:scale-105">
+                        <ZoomIn size={13} className="text-[#FFA94D]" />
+                        <span>Tap / Click to View Full Plan (HD)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CARD BODY */}
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 text-[11px] text-gray-400 mb-2">
+                      <span className="flex items-center gap-1">
+                        <Clock size={12} className="text-emerald-400" />
+                        {pkg.duration}
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-gray-600" />
+                      <span className={`font-semibold ${difficultyColor(pkg.difficulty)}`}>{pkg.difficulty}</span>
+                    </div>
+                    <h3 className="text-white font-bold text-base md:text-lg leading-snug mb-2 group-hover:text-emerald-400 transition-colors line-clamp-2">
                       {pkg.title}
                     </h3>
-                  </div>
-                  <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-                    {pkg.subtitle}
-                  </p>
-
-                  {/* Highlights Grid */}
-                  <div className="grid grid-cols-2 gap-2.5 py-3 border-y border-white/10 mb-6 text-xs text-gray-300">
-                    <div className="flex items-center gap-2">
-                      <Clock size={14} className="text-emerald-400 shrink-0" />
-                      <span>{pkg.time}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin size={14} className="text-emerald-400 shrink-0" />
-                      <span>{pkg.altitude}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users size={14} className="text-emerald-400 shrink-0" />
-                      <span>Min {pkg.minPersons}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 size={14} className="text-emerald-400 shrink-0" />
-                      <span className="truncate">{pkg.distance}</span>
+                    <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 mb-4">{pkg.description}</p>
+                    <div className="flex items-center gap-2 pt-3 border-t border-white/10 mt-auto">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openPackageModal(pkg);
+                        }}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-gray-200 hover:text-white text-xs font-semibold py-2.5 px-3 rounded-xl border border-white/15 transition-all shadow-sm cursor-pointer"
+                      >
+                        <ZoomIn size={14} className="text-[#FFA94D]" />
+                        <span>View Full Plan</span>
+                      </button>
+                      <a
+                        href={waUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#25D366] hover:bg-[#1faa53] text-white text-xs font-bold py-2.5 px-3 rounded-xl shadow transition-all hover:shadow-[#25D366]/30 active:scale-95 cursor-pointer"
+                      >
+                        <svg className="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+                        </svg>
+                        Book Now
+                      </a>
                     </div>
                   </div>
                 </div>
+              );
+            })}
 
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <a
-                    href={waUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1faa53] text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-lg hover:shadow-[#25D366]/30 active:scale-[0.98] text-sm text-center"
-                  >
-                    <svg className="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-                    </svg>
-                    Book on WhatsApp
-                  </a>
-
-                  <button
-                    onClick={() => setSelectedImage(pkg)}
-                    className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-5 rounded-xl border border-white/15 transition-all text-sm active:scale-[0.98]"
-                  >
-                    <Eye size={16} />
-                    View Itinerary
-                  </button>
-                </div>
+            {displayed.length === 0 && (
+              <div className="flex items-center justify-center w-full min-w-[300px] py-20 text-gray-500 text-sm">
+                No packages in this category yet. Check back soon!
               </div>
-            </div>
-          );
-        })}
+            )}
+          </div>
+        </div>
+
+        <div className="absolute left-0 top-0 bottom-4 w-6 bg-gradient-to-r from-[#081c15] to-transparent pointer-events-none z-10" />
+        <div className="absolute right-0 top-0 bottom-4 w-6 bg-gradient-to-l from-[#081c15] to-transparent pointer-events-none z-10" />
       </div>
 
-      {/* FULL-SCREEN LIGHTBOX MODAL */}
-      {selectedImage && (
+      {/* FULL HIGH-DEFINITION IMAGE PLAN LIGHTBOX MODAL */}
+      {selectedPkg && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 md:p-6 animate-in fade-in duration-200"
-          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 z-50 bg-black/92 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 pkg-modal-backdrop"
+          onClick={() => {
+            setSelectedPkg(null);
+            setZoomLevel(1);
+          }}
         >
           <div
-            className="relative max-w-4xl max-h-[95vh] w-full flex flex-col items-center bg-zinc-950 rounded-2xl border border-white/20 overflow-hidden shadow-2xl"
+            className="relative w-full max-w-5xl max-h-[96vh] bg-zinc-950 rounded-2xl border border-white/20 shadow-2xl overflow-hidden flex flex-col pkg-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
-            <div className="w-full flex items-center justify-between px-6 py-4 bg-zinc-900 border-b border-white/10">
-              <div>
-                <h3 className="text-lg md:text-xl font-bold text-white">
-                  {selectedImage.title}
-                </h3>
-                <p className="text-xs text-gray-400">
-                  {selectedImage.distance} • {selectedImage.price}
-                </p>
+            {/* MODAL TOP HEADER */}
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10 bg-zinc-900/95 shrink-0">
+              <div className="flex items-center gap-3 min-w-0 pr-3">
+                <span className="bg-emerald-600/30 text-emerald-400 border border-emerald-500/40 text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full whitespace-nowrap">
+                  {selectedPkg.categoryLabel}
+                </span>
+                <div className="truncate">
+                  <h3 className="text-white font-bold text-sm sm:text-base md:text-lg truncate">
+                    {selectedPkg.title}
+                  </h3>
+                  <p className="text-xs text-gray-400 hidden sm:block">
+                    Official Itinerary Plan Flyer • Complete Schedule & Altitudes
+                  </p>
+                </div>
               </div>
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors"
-                aria-label="Close modal"
-              >
-                <X size={24} />
-              </button>
-            </div>
 
-            {/* Poster Image in full view */}
-            <div className="w-full overflow-y-auto max-h-[75vh] flex justify-center p-4 bg-black/50">
-              <Image
-                src={selectedImage.image}
-                alt={selectedImage.title}
-                width={850}
-                height={1200}
-                quality={100}
-                className="max-h-[72vh] w-auto object-contain rounded-lg shadow-2xl"
-              />
-            </div>
+              {/* Toolbar: Zoom controls + Open Original + Close */}
+              <div className="flex items-center gap-2 shrink-0">
+                <div className="hidden sm:flex items-center bg-zinc-800/80 rounded-lg p-1 border border-white/10">
+                  <button
+                    type="button"
+                    onClick={() => setZoomLevel((z) => Math.max(1, z - 0.3))}
+                    className="p-1.5 text-gray-300 hover:text-white hover:bg-zinc-700 rounded transition-colors cursor-pointer"
+                    title="Zoom Out"
+                  >
+                    <ZoomOut size={15} />
+                  </button>
+                  <span className="text-[11px] font-mono text-gray-300 px-1.5 min-w-[42px] text-center">
+                    {Math.round(zoomLevel * 100)}%
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setZoomLevel((z) => Math.min(2.5, z + 0.3))}
+                    className="p-1.5 text-gray-300 hover:text-white hover:bg-zinc-700 rounded transition-colors cursor-pointer"
+                    title="Zoom In"
+                  >
+                    <ZoomIn size={15} />
+                  </button>
+                  {zoomLevel !== 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setZoomLevel(1)}
+                      className="text-[10px] font-semibold text-emerald-400 hover:text-emerald-300 px-1.5 transition-colors cursor-pointer"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
 
-            {/* Modal Footer with Direct WhatsApp */}
-            <div className="w-full p-4 bg-zinc-900 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <span className="text-xs text-gray-400 hidden sm:inline">
-                Call / WhatsApp directly at: <strong className="text-white">+91 94965 20787</strong>
-              </span>
-              <div className="flex gap-3 w-full sm:w-auto">
                 <a
-                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                    `Hi! I would like to book the "${selectedImage.title}" (${selectedImage.price}).`
-                  )}`}
+                  href={selectedPkg.image}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1faa53] text-white font-bold py-2.5 px-6 rounded-xl text-sm transition-all"
+                  className="hidden md:inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-gray-200 text-xs font-medium px-3 py-1.5 rounded-lg border border-white/15 transition-colors"
+                  title="Open Full Image in New Tab"
                 >
-                  Book on WhatsApp
+                  <ExternalLink size={13} className="text-orange-400" />
+                  <span>Open HD</span>
                 </a>
+
                 <button
-                  onClick={() => setSelectedImage(null)}
-                  className="bg-white/10 hover:bg-white/20 text-white font-medium py-2.5 px-5 rounded-xl text-sm transition-all"
+                  onClick={() => {
+                    setSelectedPkg(null);
+                    setZoomLevel(1);
+                  }}
+                  className="bg-zinc-800 hover:bg-zinc-700 text-gray-300 hover:text-white p-2 rounded-lg transition-colors border border-white/10 cursor-pointer"
+                  aria-label="Close"
                 >
-                  Close
+                  <X size={18} />
                 </button>
               </div>
             </div>
+
+            {/* MODAL MAIN CONTENT: Centered Full Flyer with Optional Next/Prev arrows */}
+            <div className="relative flex-1 bg-black/70 overflow-auto flex items-center justify-center p-2 sm:p-4 min-h-[380px] md:min-h-[520px]">
+              {/* Prev package in category */}
+              <button
+                onClick={() => navigateModal('prev')}
+                aria-label="Previous Package Flyer"
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 bg-zinc-900/90 hover:bg-emerald-600 text-white p-2.5 sm:p-3 rounded-full border border-white/20 shadow-2xl transition-all cursor-pointer"
+              >
+                <ChevronLeft size={22} />
+              </button>
+
+              {/* Full Image */}
+              <div
+                className="relative max-h-[72vh] flex items-center justify-center transition-transform duration-200 cursor-zoom-in"
+                style={{ transform: `scale(${zoomLevel})` }}
+                onClick={() => setZoomLevel((z) => (z > 1 ? 1 : 1.6))}
+                title="Click to toggle zoom"
+              >
+                <img
+                  src={selectedPkg.image}
+                  alt={selectedPkg.title}
+                  className="max-h-[68vh] sm:max-h-[72vh] w-auto max-w-full object-contain rounded-lg shadow-2xl mx-auto border border-white/10 select-none"
+                />
+              </div>
+
+              {/* Next package in category */}
+              <button
+                onClick={() => navigateModal('next')}
+                aria-label="Next Package Flyer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 bg-zinc-900/90 hover:bg-emerald-600 text-white p-2.5 sm:p-3 rounded-full border border-white/20 shadow-2xl transition-all cursor-pointer"
+              >
+                <ChevronRight size={22} />
+              </button>
+            </div>
+
+            {/* MODAL BOTTOM BAR */}
+            <div className="px-4 sm:px-6 py-3 border-t border-white/10 bg-zinc-900/95 flex flex-wrap items-center justify-between gap-3 shrink-0">
+              <div className="flex items-center gap-3 text-xs text-gray-300">
+                <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                  <Clock size={13} /> {selectedPkg.duration}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-gray-600" />
+                <span className={`font-semibold ${difficultyColor(selectedPkg.difficulty)}`}>
+                  {selectedPkg.difficulty}
+                </span>
+                <span className="hidden sm:inline text-gray-500">• Certified Local Guide Included</span>
+              </div>
+
+              <div className="flex items-center gap-2 sm:gap-3 ml-auto">
+                <a
+                  href="tel:+919496520787"
+                  className="inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-gray-200 text-xs sm:text-sm font-semibold py-2 px-3 sm:px-4 rounded-xl border border-white/15 transition-all"
+                >
+                  <Phone size={14} className="text-[#FFA94D]" />
+                  <span className="hidden sm:inline">Call:</span>
+                  <span>+91 94965 20787</span>
+                </a>
+
+                <a
+                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                    `Hi! I am viewing the official tour plan flyer for "${selectedPkg.title}". Please share availability, departure points, and booking confirmation.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1faa53] text-white font-bold py-2 px-4 sm:px-5 rounded-xl text-xs sm:text-sm shadow-lg transition-all hover:shadow-[#25D366]/30 active:scale-95"
+                >
+                  <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+                </svg>
+                <span>Book on WhatsApp</span>
+              </a>
+            </div>
           </div>
         </div>
+      </div>
       )}
     </div>
   );

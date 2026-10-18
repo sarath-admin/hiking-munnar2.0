@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '@/components/Header';
 import TrekCard from '@/components/TrekCard';
 
 export const metadata = {
@@ -11,10 +10,9 @@ export default function JeepSafariPage() {
   const safaris = [
     { 
       title: 'Kolukkumalai Sunrise Trekking Adventure', 
-      slug: 'kolukkumalai-sunrise', 
+      slug: 'kolukkumalai-sunrise-jeep-safari', 
       duration: '3-6 Hours', 
       difficulty: 'Moderate', 
-      price: '₹1,500', 
       imageUrl: '/images/slide4.jpg', 
       category: 'JEEP SAFARIS', 
       description: 'Ride rugged 4x4 trails to witness the golden sunrise at the world\'s highest organic tea plantation. A truly unforgettable off-road experience.',
@@ -25,7 +23,6 @@ export default function JeepSafariPage() {
       slug: 'waterfall-safari', 
       duration: 'Half Day', 
       difficulty: 'Easy', 
-      price: '₹2,500', 
       imageUrl: '/images/safari_waterfall_v2.jpg', 
       category: 'JEEP SAFARIS',
       description: 'Navigate through deep forest trails and splashing streams to reach hidden, pristine waterfalls accessible only by our 4x4 jeeps.',
@@ -33,20 +30,19 @@ export default function JeepSafariPage() {
     },
     { 
       title: 'Kannan Devan Hills Safari', 
-      slug: 'hills-safari', 
+      slug: 'kannan-devan-hills-jeep-safari', 
       duration: 'Full Day', 
       difficulty: 'Easy', 
-      price: '₹3,500', 
-      imageUrl: '/images/safari_kannan_devan.jpg', 
+      imageUrl: '/images/kannan_devan_safari_landscape.jpg', 
       category: 'JEEP SAFARIS',
-      description: 'An extensive full-day exploration of the vast Kannan Devan Hills, stopping at panoramic viewpoints and remote villages.'
+      description: 'Experience the scenic beauty of Munnar on an exciting 4x4 jeep adventure through green tea plantations, misty mountain viewpoints, waterfalls and rugged forest trails.',
+      isPopular: true
     },
     { 
       title: 'Night Safari Adventure', 
       slug: 'night-safari', 
       duration: '3 Hours', 
       difficulty: 'Easy', 
-      price: '₹2,000', 
       imageUrl: '/images/safari_night.jpg', 
       category: 'JEEP SAFARIS',
       description: 'Experience the thrill of the jungle at night. Spot nocturnal wildlife and enjoy the crisp mountain night air in our open-top jeeps.'
@@ -56,7 +52,6 @@ export default function JeepSafariPage() {
       slug: 'chinnar-safari', 
       duration: 'Full Day', 
       difficulty: 'Moderate', 
-      price: '₹3,000', 
       imageUrl: '/images/safari_wildlife.jpg', 
       category: 'JEEP SAFARIS',
       description: 'Drive deep into the Chinnar Wildlife Sanctuary. Perfect for wildlife photography and spotting elephants, gaurs, and exotic birds.'
@@ -65,8 +60,6 @@ export default function JeepSafariPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-      
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-[#14171A] overflow-hidden">
         <div className="absolute inset-0">

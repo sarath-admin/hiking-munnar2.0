@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '@/components/Header';
 import PackagesShowcase from '@/components/PackagesShowcase';
 import Link from 'next/link';
 import { ShieldCheck, Compass, HeartHandshake, Award } from 'lucide-react';
@@ -12,8 +11,6 @@ export const metadata = {
 export default function ToursPackagesPage() {
   return (
     <div className="min-h-screen bg-[#14171A]">
-      <Header />
-      
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden border-b border-gray-800">
         <div className="absolute inset-0">
