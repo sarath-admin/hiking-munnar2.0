@@ -134,12 +134,12 @@ export default function EnquiriesPage() {
                   <th className="py-4 px-6 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100 text-xs">
+              <tbody className="divide-y divide-stone-100 text-xs" suppressHydrationWarning>
                 {filtered.map(enq => (
                   <tr key={enq.id} className="hover:bg-orange-50/20 transition-colors">
                     {/* Customer */}
                     <td className="py-4 px-6">
-                      <p className="font-bold text-stone-900 text-sm">{enq.name}</p>
+                      <p className="font-bold text-stone-900 text-sm" suppressHydrationWarning>{enq.name}</p>
                       <div className="text-stone-500 flex flex-col gap-0.5 mt-0.5">
                         <span className="flex items-center gap-1.5"><Mail size={11} /> {enq.email}</span>
                         <span className="flex items-center gap-1.5"><Phone size={11} /> {enq.phone}</span>

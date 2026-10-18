@@ -360,7 +360,7 @@ export async function saveEnquiryToStore(
 // --- Main Admin Hook ----------------------------------------------------------
 
 export function useAdminStore() {
-  const [enquiries, setEnquiries] = useState<Enquiry[]>(() => getStoredEnquiries());
+  const [enquiries, setEnquiries] = useState<Enquiry[]>(defaultEnquiries);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [destinations, setDestinations] = useState<Destination[]>([]);
@@ -398,6 +398,10 @@ export function useAdminStore() {
 
   const loadAll = useCallback(async () => {
     try {
+      // Sync client local storage on mount without causing SSR hydration mismatch
+      const local = getStoredEnquiries();
+      setEnquiries(local);
+
       const { data: enqRows, error: enqErr } = await supabase
         .from('enquiries')
         .select('*')
@@ -405,7 +409,6 @@ export function useAdminStore() {
       if (enqErr) console.warn('[enquiries]', enqErr);
       if (enqRows && enqRows.length > 0) {
         const mapped = enqRows.map(mapEnquiry);
-        const local = getStoredEnquiries();
         const mergedMap = new Map<string, Enquiry>();
         mapped.forEach((item) => mergedMap.set(item.id, item));
         local.forEach((item) => {
@@ -416,9 +419,6 @@ export function useAdminStore() {
         const merged = Array.from(mergedMap.values());
         setEnquiries(merged);
         setStoredEnquiries(merged);
-      } else {
-        const local = getStoredEnquiries();
-        setEnquiries(local);
       }
 
       const { data: bkRows, error: bkErr } = await supabase
