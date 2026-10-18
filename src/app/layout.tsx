@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <body className="min-h-screen flex flex-col pt-0 pb-0">
         <Header />
         <main className="flex-grow">{children}</main>
