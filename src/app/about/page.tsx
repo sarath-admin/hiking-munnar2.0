@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import MunnarRouteMap from '@/components/MunnarRouteMap';
+import HowToReachMunnar from '@/components/HowToReachMunnar';
 
 export const metadata = {
   title: 'About Us | Munnar Hiking Tours',
@@ -132,10 +132,10 @@ export default function AboutPage() {
 
       </div>
 
-      {/* Route Map — image + clear text combined in one component */}
+      {/* How to Reach Munnar & Travel Essentials */}
       <div className="w-full px-4 md:px-8 pb-20 flex justify-center">
         <div className="w-full max-w-6xl">
-          <MunnarRouteMap />
+          <HowToReachMunnar />
         </div>
       </div>
     </div>
