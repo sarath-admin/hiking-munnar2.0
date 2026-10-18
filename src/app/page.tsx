@@ -2,24 +2,25 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, CheckCircle, Star, Quote, ChevronDown, Route } from 'lucide-react';
+import { ArrowRight, CheckCircle, Star, Quote, ChevronDown, Route, MapPin, Mountain, Play, X } from 'lucide-react';
 import TrekCard from '@/components/TrekCard';
 import BookingForm from '@/components/BookingForm';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('All Tours');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
 
   const heroSlides = [
-    {
-      src: '/images/slide1.jpg',
-      title: 'Beyond the Mountains.',
-      subtitle: 'Adventure Has No Limits.'
-    },
     {
       src: '/images/hero_scenic_sunrise.jpg',
       title: 'Take the Scenic Route.',
       subtitle: 'Your Munnar Story Starts Here.'
+    },
+    {
+      src: '/images/slide1.jpg',
+      title: 'Beyond the Mountains.',
+      subtitle: 'Adventure Has No Limits.'
     },
     {
       src: '/images/slide3.jpg',
@@ -149,7 +150,7 @@ export default function Home() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="relative h-[85vh] md:h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative min-h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden bg-black pt-24 pb-20 md:py-0">
         {heroSlides.map((slide, index) => (
           <Image
             key={slide.src}
@@ -165,58 +166,96 @@ export default function Home() {
           />
         ))}
 
+        {/* Ambient Gradient Overlays for High Contrast Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 z-10" />
+
         {/* Navigation Dots */}
-        <div className="absolute bottom-20 md:bottom-24 left-0 right-0 z-20 flex justify-center gap-3">
+        <div className="absolute bottom-16 md:bottom-20 left-0 right-0 z-20 flex justify-center gap-2.5">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`h-2.5 rounded-full transition-all duration-300 ${
                 index === currentImageIndex 
-                  ? 'bg-white scale-125' 
-                  : 'bg-white/50 hover:bg-white/80'
+                  ? 'w-8 bg-[#FF7A00]' 
+                  : 'w-2.5 bg-white/40 hover:bg-white/70'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
 
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
-        <div className="container relative z-20 mx-auto px-4 text-center md:text-left text-white mt-16 md:mt-0">
-          <span className="inline-block px-4 py-1.5 mb-6 text-sm md:text-base font-semibold bg-white/20 backdrop-blur-md rounded-full border border-white/30 uppercase tracking-wider">
-            KERALA'S WILD SIDE
-          </span>
-          <div className="relative min-h-[140px] md:min-h-[160px] lg:min-h-[180px]">
-            {heroSlides.map((slide, index) => (
-              <div 
-                key={index} 
-                className={`absolute inset-x-0 top-0 transition-opacity duration-1000 ease-in-out ${
-                  index === currentImageIndex ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                }`}
-              >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 md:mb-6 drop-shadow-lg tracking-tight">
-                  {slide.title}
-                </h1>
-                <p className="text-lg md:text-xl text-gray-200 drop-shadow-md">
-                  {slide.subtitle}
-                </p>
-              </div>
-            ))}
+        {/* Hero Content Container */}
+        <div className="container relative z-20 mx-auto px-4 sm:px-6 md:px-8 text-center md:text-left text-white max-w-7xl">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 sm:mb-6 rounded-full bg-black/50 backdrop-blur-md border border-[#FFA000]/60 shadow-lg">
+            <MapPin size={15} className="text-[#FFA000] fill-[#FFA000]/20" />
+            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#FFE0B2] uppercase">
+              KERALA&apos;S WILD SIDE
+            </span>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start mt-8">
+
+          {/* Main Headline */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white leading-[1.05] tracking-tight mb-5 drop-shadow-2xl">
+            <span className="block">Take the</span>
+            <span className="text-[#FF8A00]">Scenic</span>{" "}
+            <span className="relative inline-block">
+              Route.
+              {/* Orange brush underline */}
+              <svg
+                className="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-3 sm:h-4 text-[#FF7A00] pointer-events-none"
+                viewBox="0 0 240 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M4 11C45 4 150 2 237 9.5C185 14 120 12.5 4 11Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </h1>
+
+          {/* Subheading & Paragraph */}
+          <div className="max-w-2xl mb-8 space-y-2">
+            <h2 className="text-xl sm:text-2xl md:text-2xl font-bold text-white drop-shadow-md">
+              Your Munnar Story Starts Here.
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-gray-200/90 leading-relaxed drop-shadow">
+              Breathtaking trails, misty mountains, lush valleys and unforgettable experiences — all in one place.
+            </p>
+          </div>
+
+          {/* Call to Action Buttons */}
+          <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
+            {/* Explore Adventures Button */}
             <a 
               href="#treks" 
-              className="w-auto inline-flex bg-[#ff7700] hover:bg-[#e66a00] text-white px-7 py-3 rounded-full font-bold text-base md:text-lg transition-all shadow-[0_0_20px_rgba(255,119,0,0.5)] hover:shadow-[0_0_25px_rgba(255,119,0,0.7)] hover:-translate-y-1 text-center items-center justify-center gap-3"
+              className="inline-flex items-center gap-3 bg-[#FF7A00] hover:bg-[#FF6500] text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg transition-all duration-300 shadow-[0_10px_30px_rgba(255,122,0,0.45)] hover:shadow-[0_14px_38px_rgba(255,122,0,0.65)] hover:-translate-y-0.5 group"
             >
-              <Route size={22} />
-              <span className="w-[1px] h-5 bg-white/40"></span>
-              Explore Adventures
+              <Mountain size={20} className="text-white fill-white/20 shrink-0" />
+              <span>Explore Adventures</span>
+              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
             </a>
+
+            {/* Watch Video Button */}
+            <button
+              type="button"
+              onClick={() => setVideoModalOpen(true)}
+              className="inline-flex items-center gap-3 bg-black/40 hover:bg-black/60 border border-white/25 hover:border-white/40 text-white px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 group"
+            >
+              <div className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center pl-0.5 shadow-sm group-hover:scale-110 transition-transform shrink-0">
+                <Play size={12} className="fill-black text-black" />
+              </div>
+              <span>Watch Video</span>
+            </button>
           </div>
         </div>
-        
+
         {/* Trust Bar */}
-        <div className="absolute bottom-0 w-full bg-black/50 backdrop-blur-md border-t border-white/10 py-4 hidden md:block">
+        <div className="absolute bottom-0 w-full bg-black/60 backdrop-blur-md border-t border-white/10 py-4 hidden md:block z-20">
           <div className="container mx-auto px-6 flex justify-between text-gray-300 text-sm font-medium">
             <div className="flex items-center gap-2"><CheckCircle size={16} className="text-[var(--color-accent)]" /> 5000+ Happy Trekkers</div>
             <div className="flex items-center gap-2"><CheckCircle size={16} className="text-[var(--color-accent)]" /> Certified Local Guides</div>
@@ -225,6 +264,34 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Video Modal */}
+      {videoModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-200"
+          onClick={() => setVideoModalOpen(false)}
+        >
+          <div 
+            className="relative w-full max-w-4xl bg-black rounded-3xl overflow-hidden border border-white/20 shadow-2xl aspect-video flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setVideoModalOpen(false)}
+              className="absolute top-4 right-4 text-white/80 hover:text-white p-2.5 rounded-full bg-black/60 hover:bg-black/90 transition-colors z-50 border border-white/10"
+              aria-label="Close video"
+            >
+              <X size={22} />
+            </button>
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/1laL5WJ14tE?autoplay=1&rel=0"
+              title="Munnar Kerala Tourism Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
 
       {/* FEATURED TREKS SECTION */}
       <section id="treks" className="py-20 bg-[#14171A]">
