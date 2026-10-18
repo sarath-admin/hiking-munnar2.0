@@ -150,7 +150,7 @@ export default function Home() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="relative min-h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden bg-black pt-24 pb-20 md:py-0">
+      <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black pt-28 pb-20 md:py-0">
         {heroSlides.map((slide, index) => (
           <Image
             key={slide.src}
@@ -171,7 +171,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 z-10" />
 
         {/* Navigation Dots */}
-        <div className="absolute bottom-16 md:bottom-20 left-0 right-0 z-20 flex justify-center gap-2.5">
+        <div className="absolute bottom-8 sm:bottom-12 md:bottom-20 left-0 right-0 z-20 flex justify-center gap-2.5">
           {heroSlides.map((_, index) => (
             <button
               key={index}
@@ -186,8 +186,8 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Hero Content Container */}
-        <div className="container relative z-20 mx-auto px-4 sm:px-6 md:px-8 text-center md:text-left text-white max-w-7xl">
+        {/* Hero Content Container - Positioned a little lower down */}
+        <div className="container relative z-20 mx-auto px-4 sm:px-6 md:px-8 text-center md:text-left text-white max-w-7xl pt-8 sm:pt-12 md:pt-16 mt-4 sm:mt-8 md:mt-10">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 sm:mb-6 rounded-full bg-black/50 backdrop-blur-md border border-[#FFA000]/60 shadow-lg">
             <MapPin size={15} className="text-[#FFA000] fill-[#FFA000]/20" />
