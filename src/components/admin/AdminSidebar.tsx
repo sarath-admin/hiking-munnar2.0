@@ -52,7 +52,13 @@ export default function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => 
           {/* Back to Public Website link */}
           <Link
             href="/"
-            onClick={onCloseMobile}
+            onClick={async () => {
+              if (typeof window !== 'undefined') {
+                sessionStorage.removeItem('admin_fresh_login');
+              }
+              await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+              onCloseMobile?.();
+            }}
             className="group flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-semibold text-emerald-300 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/25 transition-all duration-200 mb-2 shadow-xs"
           >
             <div className="flex items-center gap-3.5">
@@ -99,6 +105,9 @@ export default function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => 
           {/* Log Out Button */}
           <button
             onClick={async () => {
+              if (typeof window !== 'undefined') {
+                sessionStorage.removeItem('admin_fresh_login');
+              }
               await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
               window.location.replace('/admin/login');
             }}
@@ -132,7 +141,13 @@ export default function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => 
               </p>
               <Link
                 href="/"
-                onClick={onCloseMobile}
+                onClick={async () => {
+                  if (typeof window !== 'undefined') {
+                    sessionStorage.removeItem('admin_fresh_login');
+                  }
+                  await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+                  onCloseMobile?.();
+                }}
                 className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-bold text-white/90 hover:text-amber-300 transition-colors uppercase tracking-wider"
               >
                 Go to Website <ExternalLink size={12} />

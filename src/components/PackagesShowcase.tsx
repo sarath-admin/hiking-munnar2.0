@@ -450,15 +450,15 @@ export default function PackagesShowcase({ showTitle = true, limit }: PackagesSh
                     )}
                   </div>
 
-                  {/* FULL FLYER IMAGE CONTAINER - ASPECT 3:4 TO SHOW FULL UNCLIPPED PORTRAIT FLYER */}
-                  <div className="relative aspect-[3/4] w-full bg-zinc-950 overflow-hidden group/img flex items-center justify-center border-b border-white/5">
+                  {/* FULL FLYER IMAGE CONTAINER - ASPECT-SQUARE TO SHOW SQUARE FLYER */}
+                  <div className="relative aspect-square w-full bg-zinc-950 overflow-hidden group/img flex items-center justify-center border-b border-white/5">
                     <Image
                       src={pkg.image}
                       alt={`${pkg.title} - Full Official Tour Plan Flyer`}
                       fill
                       sizes="(max-width: 640px) 340px, 400px"
                       quality={95}
-                      className="object-contain p-1 transition-transform duration-300 group-hover/img:scale-[1.02]"
+                      className="object-contain transition-transform duration-300 group-hover/img:scale-[1.02]"
                     />
 
                     {/* Subtle floating click/tap prompt pill that leaves flyer content fully visible */}

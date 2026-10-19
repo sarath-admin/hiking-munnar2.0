@@ -77,7 +77,63 @@ export interface TourItem {
 }
 
 export const TOURS_DATA: TourItem[] = [
-  // 1. Kolukkumalai Sunrise Jeep Safari
+  // 1. Anakulam Wild Elephant & Forest Jeep Safari
+  {
+    id: 'anakulam-jeep-safari',
+    slug: 'anakulam-jeep-safari',
+    aliases: ['anakulam-jeep', 'anakulam-wild-elephant-safari'],
+    title: 'Anakulam Wild Elephant & Forest Jeep Safari',
+    subtitle: 'Off-Road Journey to the Famous Natural Elephant River Crossing',
+    category: 'JEEP SAFARIS',
+    categorySlug: 'jeep-safaris',
+    price: '',
+    duration: 'Full Day (6–8 Hours)',
+    difficulty: 'Moderate',
+    isPopular: true,
+    badge: 'MOST POPULAR',
+    imageUrl: '/images/anakulam_jeep_safari_landscape.jpg',
+    galleryImages: [
+      '/images/jeep_safari_anakulam_hq.jpg',
+      '/images/safari_waterfall.jpg',
+      '/images/safari_kannan_devan.jpg'
+    ],
+    shortDescription: 'Explore nature with off-road 4x4 adventure, hidden waterfalls, Mankulam town, and wild elephant spotting zones at the famous Anakulam riverbank.',
+    overview: 'Anakulam is a miraculous natural phenomenon where wild elephant herds emerge from dense reserve forests to drink and play in the mineral-rich waters of the Idacholayar river. Our full-day 4x4 expedition covers scenic tea viewpoints, Viripara Waterfalls, 33 Falls, Perambankuthu, tribal settlements, and the magical elephant watering banks of Anakulam.',
+    highlights: [
+      'High chances of spotting wild elephant herds in their natural habitat',
+      'Visit Viripara and 33 scenic waterfalls along off-road forest trails',
+      'Explore Mankulam town and taste local hill-produce delicacies',
+      'Authentic tribal settlement cultural stop with friendly local guide'
+    ],
+    summaryInfo: {
+      duration: 'Full Day · Approx. 8:30 AM – 5:00 PM',
+      distance: '65 km total round trip in 4x4 Jeep',
+      difficulty: 'Moderate off-road adventure',
+      minGroup: '1 Jeep (up to 6 guests)',
+      guide: 'Certified Local 4x4 Driver-Guide',
+      pickupLocation: 'Munnar Hotel Pickup'
+    },
+    itinerary: [
+      { time: '08:30 AM', activity: 'Pickup from Munnar and head towards scenic tea viewpoints.' },
+      { time: '09:45 AM', activity: 'Stop at Viripara Waterfalls for photography and morning mist.' },
+      { time: '11:00 AM', activity: 'Explore 33 Waterfalls and Perambankuthu cascades.' },
+      { time: '12:30 PM', activity: 'Mankulam Town lunch break with traditional Kerala dishes.' },
+      { time: '02:00 PM', activity: 'Visit tribal village and understand traditional spice agriculture.' },
+      { time: '03:30 PM', activity: 'Arrive at Anakulam river bank for wild elephant observation.' },
+      { time: '05:30 PM', activity: 'Return drive back to Munnar hotel.' }
+    ],
+    inclusions: ['Private 4x4 Jeep for the full day', 'Experienced driver-guide', 'All vehicle permits and tolls'],
+    exclusions: ['Lunch and personal snacks', 'Gratuities'],
+    whatToBring: ['Camera with zoom lens', 'Comfortable clothes and sun protection'],
+    safetyInfo: ['Wild elephants must be respected from the designated safe riverbank viewing deck.'],
+    meetingPoint: 'Direct hotel pickup across Munnar',
+    bestTimeToVisit: 'September to May for optimal elephant sightings.',
+    faqs: [
+      { q: 'Is Anakulam safe for families?', a: 'Yes! The viewing point is situated safely across the natural river border.' }
+    ]
+  },
+
+  // 2. Kolukkumalai Sunrise Jeep Safari
   {
     id: 'kolukkumalai-sunrise-jeep-safari',
     slug: 'kolukkumalai-sunrise-jeep-safari',
@@ -1623,61 +1679,6 @@ export const TOURS_DATA: TourItem[] = [
     ]
   },
 
-  // 9. Anakulam Jeep Safari
-  {
-    id: 'anakulam-jeep-safari',
-    slug: 'anakulam-jeep-safari',
-    aliases: ['anakulam-jeep', 'anakulam-wild-elephant-safari'],
-    title: 'Anakulam Wild Elephant & Forest Jeep Safari',
-    subtitle: 'Off-Road Journey to the Famous Natural Elephant River Crossing',
-    category: 'JEEP SAFARIS',
-    categorySlug: 'jeep-safaris',
-    price: '',
-    duration: 'Full Day (6–8 Hours)',
-    difficulty: 'Moderate',
-    isPopular: true,
-    badge: 'BEST SELLER',
-    imageUrl: '/images/anakulam_jeep_safari_landscape.jpg',
-    galleryImages: [
-      '/images/jeep_safari_anakulam_hq.jpg',
-      '/images/safari_waterfall.jpg',
-      '/images/safari_kannan_devan.jpg'
-    ],
-    shortDescription: 'Explore nature with off-road 4x4 adventure, hidden waterfalls, Mankulam town, and wild elephant spotting zones at the famous Anakulam riverbank.',
-    overview: 'Anakulam is a miraculous natural phenomenon where wild elephant herds emerge from dense reserve forests to drink and play in the mineral-rich waters of the Idacholayar river. Our full-day 4x4 expedition covers scenic tea viewpoints, Viripara Waterfalls, 33 Falls, Perambankuthu, tribal settlements, and the magical elephant watering banks of Anakulam.',
-    highlights: [
-      'High chances of spotting wild elephant herds in their natural habitat',
-      'Visit Viripara and 33 scenic waterfalls along off-road forest trails',
-      'Explore Mankulam town and taste local hill-produce delicacies',
-      'Authentic tribal settlement cultural stop with friendly local guide'
-    ],
-    summaryInfo: {
-      duration: 'Full Day · Approx. 8:30 AM – 5:00 PM',
-      distance: '65 km total round trip in 4x4 Jeep',
-      difficulty: 'Moderate off-road adventure',
-      minGroup: '1 Jeep (up to 6 guests)',
-      guide: 'Certified Local 4x4 Driver-Guide',
-      pickupLocation: 'Munnar Hotel Pickup'
-    },
-    itinerary: [
-      { time: '08:30 AM', activity: 'Pickup from Munnar and head towards scenic tea viewpoints.' },
-      { time: '09:45 AM', activity: 'Stop at Viripara Waterfalls for photography and morning mist.' },
-      { time: '11:00 AM', activity: 'Explore 33 Waterfalls and Perambankuthu cascades.' },
-      { time: '12:30 PM', activity: 'Mankulam Town lunch break with traditional Kerala dishes.' },
-      { time: '02:00 PM', activity: 'Visit tribal village and understand traditional spice agriculture.' },
-      { time: '03:30 PM', activity: 'Arrive at Anakulam river bank for wild elephant observation.' },
-      { time: '05:30 PM', activity: 'Return drive back to Munnar hotel.' }
-    ],
-    inclusions: ['Private 4x4 Jeep for the full day', 'Experienced driver-guide', 'All vehicle permits and tolls'],
-    exclusions: ['Lunch and personal snacks', 'Gratuities'],
-    whatToBring: ['Camera with zoom lens', 'Comfortable clothes and sun protection'],
-    safetyInfo: ['Wild elephants must be respected from the designated safe riverbank viewing deck.'],
-    meetingPoint: 'Direct hotel pickup across Munnar',
-    bestTimeToVisit: 'September to May for optimal elephant sightings.',
-    faqs: [
-      { q: 'Is Anakulam safe for families?', a: 'Yes! The viewing point is situated safely across the natural river border.' }
-    ]
-  },
 
   // 10. Night Safari Adventure
   {

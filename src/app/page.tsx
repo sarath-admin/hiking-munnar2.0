@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CheckCircle, Star, Quote, ChevronDown, Route, MapPin, Mountain, Play, X } from 'lucide-react';
 import TrekCard from '@/components/TrekCard';
 import BookingForm from '@/components/BookingForm';
@@ -13,31 +14,63 @@ export default function Home() {
 
   const heroSlides = [
     {
-      src: '/images/hero_scenic_sunrise.jpg',
-      title: 'Take the Scenic Route.',
-      subtitle: 'Your Munnar Story Starts Here.'
+      id: '01',
+      tag: '01 — SUNRISE ESCAPES',
+      titleLine1: 'Sunrise',
+      titleHighlight: 'Escapes.',
+      subtitle: 'Wake up above the clouds.',
+      description: 'Witness golden sunrises, rolling mist, and panoramic mountain views from Munnar’s scenic viewpoints.',
+      src: '/images/hero_sunrise_escapes.jpg',
+      ctaText: 'Explore Sunrise Points',
+      ctaHref: '#treks'
     },
     {
-      src: '/images/slide1.jpg',
-      title: 'Beyond the Mountains.',
-      subtitle: 'Adventure Has No Limits.'
+      id: '02',
+      tag: '02 — WILDLIFE & JEEP SAFARI',
+      titleLine1: 'Wildlife &',
+      titleHighlight: 'Jeep Safari.',
+      subtitle: 'Adventure beyond the ordinary.',
+      description: 'Ride through rugged trails, explore lush landscapes, and discover the wild beauty of the Western Ghats. Wildlife sightings are not guaranteed.',
+      src: '/images/hero_jeep_safari.jpg',
+      ctaText: 'Explore Jeep Safaris',
+      ctaHref: '/jeep-safari'
     },
     {
-      src: '/images/slide3.jpg',
-      title: 'Into the Mist.',
-      subtitle: 'Out of the Ordinary.'
+      id: '03',
+      tag: '03 — MOUNTAIN TREKKING',
+      titleLine1: 'Mountain',
+      titleHighlight: 'Trekking.',
+      subtitle: 'Find your path into the wild.',
+      description: 'Follow scenic mountain trails, breathe in the fresh air, and discover breathtaking valleys and cloud-kissed peaks.',
+      src: '/images/hero_mountain_trekking.jpg',
+      ctaText: 'Explore Trekking Trails',
+      ctaHref: '/trekking'
     },
     {
-      src: '/images/slide4.jpg',
-      title: 'Go Higher. Feel More.',
-      subtitle: 'Unforgettable Adventures in Munnar.'
+      id: '04',
+      tag: '04 — SUNRISE TREKKING',
+      titleLine1: 'Sunrise',
+      titleHighlight: 'Trekking.',
+      subtitle: '“Chase the Sunrise, Conquer the Clouds.”',
+      description: 'Follow scenic mountain trails, breathe in the fresh morning air, and conquer cloud-kissed peaks as the golden sun rises over Munnar.',
+      src: '/images/hero_sunrise_trekking.jpg',
+      ctaText: 'Explore Sunrise Treks',
+      ctaHref: '/trekking'
     },
     {
-      src: '/images/slide5.jpg',
-      title: 'Adventure Awaits.',
-      subtitle: 'Discover the peaks, trails and hidden beauty of Munnar.'
+      id: '05',
+      tag: '05 — TEA PLANTATION SUNRISE',
+      titleLine1: 'Tea Plantation',
+      titleHighlight: 'Sunrise.',
+      subtitle: '“Golden Rays, Endless Green.”',
+      description: 'Witness golden sunrises, rolling morning mist, and panoramic viewpoints over Munnar’s endless emerald tea slopes.',
+      src: '/images/hero_tea_plantation_sunrise.jpg',
+      ctaText: 'Explore Tea Experiences',
+      ctaHref: '/tours-packages'
     }
   ];
+
+  const currentSlide = heroSlides[currentImageIndex] || heroSlides[0];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,6 +78,15 @@ export default function Home() {
     }, 5000); // Change image every 5 seconds
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!videoModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setVideoModalOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [videoModalOpen]);
 
   const categories = [
     'All Tours', 'Jeep Safaris', 'Trekking Adventure', 
@@ -54,13 +96,13 @@ export default function Home() {
   const allTours = [
     // Top 3 from Design Reference
     { 
-      title: 'Kolukkumalai Sunrise Trekking Adventure', 
-      slug: 'kolukkumalai-sunrise-jeep-safari', 
-      duration: '3-6 Hours', 
+      title: 'Anakulam Wild Elephant & Forest Jeep Safari', 
+      slug: 'anakulam-jeep-safari', 
+      duration: 'Full Day (6–8 Hours)', 
       difficulty: 'Moderate', 
-      imageUrl: '/images/slide4.jpg', 
+      imageUrl: '/images/anakulam_jeep_safari_landscape.jpg', 
       category: 'JEEP SAFARIS', 
-      description: 'Ride rugged 4x4 trails to witness the golden sunrise at the world\'s highest organic tea plantation...',
+      description: 'Explore nature with off-road 4x4 adventure, hidden waterfalls, Mankulam town, and wild elephant spotting zones at the famous Anakulam riverbank...',
       isPopular: true 
     },
     { 
@@ -85,6 +127,15 @@ export default function Home() {
     },
     
     // Other Jeep
+    { 
+      title: 'Kolukkumalai Sunrise Trekking Adventure', 
+      slug: 'kolukkumalai-sunrise-jeep-safari', 
+      duration: '3-6 Hours', 
+      difficulty: 'Moderate', 
+      imageUrl: '/images/slide4.jpg', 
+      category: 'Jeep Safaris',
+      description: 'Ride rugged 4x4 trails to witness the golden sunrise at the world\'s highest organic tea plantation...'
+    },
     { title: 'Off-Road Waterfall Safari', slug: 'waterfall-safari', duration: 'Half Day', difficulty: 'Easy', imageUrl: '/images/safari_waterfall_v2.jpg', category: 'Jeep Safaris' },
     { title: 'Kannan Devan Hills Safari', slug: 'kannan-devan-hills-jeep-safari', duration: 'Full Day', difficulty: 'Easy', imageUrl: '/images/kannan_devan_safari_landscape.jpg', category: 'Jeep Safaris' },
     { title: 'Night Safari Adventure', slug: 'night-safari', duration: '3 Hours', difficulty: 'Easy', imageUrl: '/images/safari_night.jpg', category: 'Jeep Safaris' },
@@ -187,56 +238,65 @@ export default function Home() {
         </div>
 
         {/* Hero Content Container - Positioned a little lower down */}
-        <div className="container relative z-20 mx-auto px-4 sm:px-6 md:px-8 text-center md:text-left text-white max-w-7xl pt-8 sm:pt-12 md:pt-16 mt-4 sm:mt-8 md:mt-10">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 sm:mb-6 rounded-full bg-black/50 backdrop-blur-md border border-[#FFA000]/60 shadow-lg">
-            <MapPin size={15} className="text-[#FFA000] fill-[#FFA000]/20" />
-            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#FFE0B2] uppercase">
-              KERALA&apos;S WILD SIDE
-            </span>
-          </div>
+        <div className="container relative z-20 mx-auto px-4 sm:px-6 md:px-8 text-center md:text-left text-white max-w-7xl pt-8 sm:pt-12 md:pt-16 mt-4 sm:mt-8 md:mt-10 min-h-[380px] flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.45, ease: 'easeOut' }}
+            >
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 sm:mb-6 rounded-full bg-black/50 backdrop-blur-md border border-[#FFA000]/60 shadow-lg">
+                <MapPin size={15} className="text-[#FFA000] fill-[#FFA000]/20" />
+                <span className="text-xs sm:text-sm font-bold tracking-widest text-[#FFE0B2] uppercase">
+                  {currentSlide.tag}
+                </span>
+              </div>
 
-          {/* Main Headline */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white leading-[1.05] tracking-tight mb-5 drop-shadow-2xl">
-            <span className="block">Take the</span>
-            <span className="text-[#FF8A00]">Scenic</span>{" "}
-            <span className="relative inline-block">
-              Route.
-              {/* Orange brush underline */}
-              <svg
-                className="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-3 sm:h-4 text-[#FF7A00] pointer-events-none"
-                viewBox="0 0 240 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M4 11C45 4 150 2 237 9.5C185 14 120 12.5 4 11Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </span>
-          </h1>
+              {/* Main Headline */}
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white leading-[1.05] tracking-tight mb-5 drop-shadow-2xl">
+                <span className="block">{currentSlide.titleLine1}</span>
+                <span className="relative inline-block">
+                  <span className="text-[#FF8A00]">{currentSlide.titleHighlight}</span>
+                  {/* Orange brush underline */}
+                  <svg
+                    className="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-3 sm:h-4 text-[#FF7A00] pointer-events-none"
+                    viewBox="0 0 240 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M4 11C45 4 150 2 237 9.5C185 14 120 12.5 4 11Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+              </h1>
 
-          {/* Subheading & Paragraph */}
-          <div className="max-w-2xl mb-8 space-y-2">
-            <h2 className="text-xl sm:text-2xl md:text-2xl font-bold text-white drop-shadow-md">
-              Your Munnar Story Starts Here.
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-200/90 leading-relaxed drop-shadow">
-              Breathtaking trails, misty mountains, lush valleys and unforgettable experiences — all in one place.
-            </p>
-          </div>
+              {/* Subheading & Paragraph */}
+              <div className="max-w-2xl mb-8 space-y-2">
+                <h2 className="text-xl sm:text-2xl md:text-2xl font-bold text-white drop-shadow-md">
+                  {currentSlide.subtitle}
+                </h2>
+                <p className="text-sm sm:text-base md:text-lg text-gray-200/90 leading-relaxed drop-shadow">
+                  {currentSlide.description}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Call to Action Buttons */}
           <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
             {/* Explore Adventures Button */}
             <a 
-              href="#treks" 
+              href={currentSlide.ctaHref} 
               className="inline-flex items-center gap-3 bg-[#FF7A00] hover:bg-[#FF6500] text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg transition-all duration-300 shadow-[0_10px_30px_rgba(255,122,0,0.45)] hover:shadow-[0_14px_38px_rgba(255,122,0,0.65)] hover:-translate-y-0.5 group"
             >
               <Mountain size={20} className="text-white fill-white/20 shrink-0" />
-              <span>Explore Adventures</span>
+              <span>{currentSlide.ctaText}</span>
               <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
             </a>
 
@@ -282,13 +342,16 @@ export default function Home() {
             >
               <X size={22} />
             </button>
-            <iframe
-              className="w-full h-full"
-              src="https://www.youtube-nocookie.com/embed/1laL5WJ14tE?autoplay=1&rel=0"
-              title="Munnar Kerala Tourism Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+            <video
+              className="w-full h-full object-contain bg-black"
+              controls
+              autoPlay
+              playsInline
+              preload="auto"
+              src="/videos/welcome-munnar-hiking-tours.mp4"
+            >
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       )}

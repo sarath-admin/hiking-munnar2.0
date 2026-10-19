@@ -36,7 +36,6 @@ export async function POST(req: NextRequest) {
       httpOnly: true,        // not accessible via JS
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: SESSION_MAX_AGE,
       path: '/',
     });
 

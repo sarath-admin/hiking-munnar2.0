@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import HowToReachMunnar from '@/components/HowToReachMunnar';
+import InsuranceVerificationSection from '@/components/InsuranceVerificationSection';
 
 export const metadata = {
   title: 'About Us | Munnar Hiking Tours',
@@ -86,8 +87,12 @@ export default function AboutPage() {
           <p className="text-gray-400 mb-4 leading-relaxed text-[16px]">
             Welcome to Munnar Trekking Trials. We are the leading adventure tour operators in munnar. We believe in creating close ties with our customers to best understand their travel needs and preferences. We provide a local guide for all our trekking tours. The benefits of the local guide is the guest can know more information about munnar, tea plants and local wildlife of munnar because they know very well about those things. All our clients are extremely happy and appreciated with our handling of their tour arrangements. We always take utmost care while planning and executing all the tour arrangements in munnar.
           </p>
-          <p className="text-gray-400 mb-8 leading-relaxed text-[16px]">
+          <p className="text-gray-400 mb-4 leading-relaxed text-[16px]">
             Also we have best deals with top tourist homestay, cottages and resorts in munnar with special rates. We are arranging taxi service to our guests at a reasonable price. Our team guarantees you full satisfaction and makes their munnar trip more happy and memorable.
+          </p>
+          <p className="text-gray-300 mb-8 leading-relaxed text-[16px] bg-[#17231c]/60 p-4 rounded-xl border border-emerald-900/40 text-left">
+            <strong className="text-emerald-300 block mb-1 font-semibold">100% Client Safety & Insurance Coverage:</strong>
+            We claim comprehensive insurance protection for our clients. Every trekking trail, mountain hike, sunrise point trip, and off-road jeep safari guest is officially covered under our registered Public Liability Insurance policy for complete safety and peace of mind.
           </p>
           
           <h3 className="text-lg font-bold text-[#6A8B74] tracking-widest mb-8 uppercase">Munnar Hiking Trials</h3>
@@ -120,6 +125,9 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+
+          {/* Insurance Verification Section with QR Code & Company Details */}
+          <InsuranceVerificationSection />
         </div>
 
         {/* Section 2: About Munnar */}

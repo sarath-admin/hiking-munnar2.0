@@ -76,6 +76,11 @@ export default function AdminLoginPage() {
 
   useEffect(() => {
     setMounted(true);
+    // Always clear session on arriving at login page so it requires a fresh login
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('admin_fresh_login');
+      fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+    }
   }, []);
 
   const handleSubmit = async (e?: React.FormEvent) => {
@@ -108,6 +113,11 @@ export default function AdminLoginPage() {
         setTimeout(() => setShake(false), 600);
         setLoading(false);
         return;
+      }
+
+      // Record fresh active session in sessionStorage
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('admin_fresh_login', 'true');
       }
 
       // Success path — replace history entry so back button smoothly returns to website

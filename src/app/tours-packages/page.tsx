@@ -1,5 +1,6 @@
 import React from 'react';
 import PackagesShowcase from '@/components/PackagesShowcase';
+import TravelPhotoJournal from '@/components/journal/TravelPhotoJournal';
 import Link from 'next/link';
 import { ShieldCheck, Compass, HeartHandshake, Award } from 'lucide-react';
 
@@ -41,6 +42,10 @@ export default function ToursPackagesPage() {
           <PackagesShowcase showTitle={false} />
         </div>
       </section>
+
+      {/* 3D TRAVEL PHOTO JOURNAL */}
+      <TravelPhotoJournal />
+
 
       {/* WHY BOOK DIRECTLY WITH MUNNAR HIKING TOURS */}
       <section className="py-16 bg-[#1a1e22] border-t border-white/10">

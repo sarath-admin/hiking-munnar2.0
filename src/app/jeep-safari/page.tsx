@@ -9,6 +9,16 @@ export const metadata = {
 export default function JeepSafariPage() {
   const safaris = [
     { 
+      title: 'Anakulam Wild Elephant & Forest Jeep Safari', 
+      slug: 'anakulam-jeep-safari', 
+      duration: 'Full Day (6–8 Hours)', 
+      difficulty: 'Moderate', 
+      imageUrl: '/images/anakulam_jeep_safari_landscape.jpg', 
+      category: 'JEEP SAFARIS', 
+      description: 'Explore nature with off-road 4x4 adventure, hidden waterfalls, Mankulam town, and wild elephant spotting zones at the famous Anakulam riverbank.',
+      isPopular: true 
+    },
+    { 
       title: 'Kolukkumalai Sunrise Trekking Adventure', 
       slug: 'kolukkumalai-sunrise-jeep-safari', 
       duration: '3-6 Hours', 

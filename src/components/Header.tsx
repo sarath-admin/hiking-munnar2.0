@@ -101,7 +101,12 @@ export default function Header() {
                 Plan Your Adventure
               </button>
               <Link 
-                href="/admin" 
+                href="/admin/login" 
+                onClick={async () => {
+                  try {
+                    await fetch('/api/admin/logout', { method: 'POST' });
+                  } catch {}
+                }}
                 className="hidden sm:inline-flex bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white px-4 py-2 rounded-full font-medium text-sm transition-colors items-center gap-2"
               >
                 <User size={16} /> Admin
@@ -162,8 +167,13 @@ export default function Header() {
               </button>
               
               <Link 
-                href="/admin" 
-                onClick={() => setMobileMenuOpen(false)}
+                href="/admin/login" 
+                onClick={async () => {
+                  setMobileMenuOpen(false);
+                  try {
+                    await fetch('/api/admin/logout', { method: 'POST' });
+                  } catch {}
+                }}
                 className="w-full text-center bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/80 text-white py-2.5 px-4 rounded-2xl font-medium text-sm transition-colors flex items-center justify-center gap-2"
               >
                 <User size={16} /> Admin Login

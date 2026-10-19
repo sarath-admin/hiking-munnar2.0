@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AdminSidebar from './AdminSidebar';
 import AdminTopNav from './AdminTopNav';
@@ -19,6 +19,43 @@ export default function AdminLayout({
   onSearchChange,
 }: AdminLayoutProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    // Detect if page was reloaded / refreshed
+    const navEntries = performance.getEntriesByType('navigation');
+    const isReload =
+      navEntries.length > 0 &&
+      (navEntries[0] as PerformanceNavigationTiming).type === 'reload';
+
+    const hasFreshLogin =
+      typeof window !== 'undefined'
+        ? sessionStorage.getItem('admin_fresh_login')
+        : null;
+
+    if (isReload || !hasFreshLogin) {
+      // Reload detected or unauthenticated -> clear session and redirect to login
+      if (typeof window !== 'undefined') {
+        sessionStorage.removeItem('admin_fresh_login');
+      }
+      fetch('/api/admin/logout', { method: 'POST' })
+        .catch(() => {})
+        .finally(() => {
+          window.location.replace('/admin/login');
+        });
+      return;
+    }
+
+    setIsAuthorized(true);
+  }, []);
+
+  if (isAuthorized === null) {
+    return (
+      <div className="min-h-screen bg-[#14284d] flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFF6ED] via-[#FFEBDC] to-[#FEDBC7] p-2 sm:p-4 md:p-7 flex items-center justify-center relative overflow-x-hidden selection:bg-orange-500 selection:text-white">
