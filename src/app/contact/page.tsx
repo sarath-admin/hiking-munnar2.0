@@ -1,7 +1,7 @@
 import React from 'react';
 import BookingForm from '@/components/BookingForm';
 import GoogleReviewsSlider from '@/components/GoogleReviewsSlider';
-import { MapPin, Phone, Mail, Clock, MessageSquare, Star, ArrowRight, ShieldCheck } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Star, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export const metadata = {
   title: 'Contact Us | Munnar Hiking Tours',
@@ -52,36 +52,15 @@ export default function ContactPage() {
   return (
     <div className="bg-[#fcfbf7] min-h-screen">
       {/* 1. TOP HERO SECTION */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden bg-[#12161a]">
-        {/* Background Image: Sunset Mountains with Hikers Silhouette */}
-        <div className="absolute inset-0">
+      <section className="relative w-full overflow-hidden bg-[#12161a] pt-24 sm:pt-28 md:pt-32 pb-2 sm:pb-4 border-b border-white/10">
+        <div className="w-full">
           <img
-            src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1920&auto=format&fit=crop"
-            alt="Munnar Hiking Tours Sunset Ridge"
-            className="w-full h-full object-cover object-center"
+            src="/images/contact_hero_banner_hq.png"
+            alt="Contact Us - Munnar Hiking Tours"
+            className="w-full h-[180px] sm:h-[260px] md:h-[340px] lg:h-auto max-h-[520px] object-cover object-left sm:object-center select-none"
           />
-          {/* Dark Gradient Overlay for optimal legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#12161a] via-transparent to-black/40" />
         </div>
-
-        <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-6xl">
-          {/* GET IN TOUCH Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-500/50 bg-black/40 backdrop-blur-md text-[#FFA94D] text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 shadow-sm">
-            <MessageSquare className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span>GET IN TOUCH</span>
-          </div>
-
-          {/* Large Title: Contact Us (with orange "Us") */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-4 drop-shadow-md">
-            Contact <span className="text-[#FFA94D]">Us</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl leading-relaxed drop-shadow">
-            We'd love to hear from you. Let's plan your next adventure in Munnar!
-          </p>
-        </div>
+        <h1 className="sr-only">Contact Us - Munnar Hiking Tours</h1>
       </section>
 
       {/* 2. CONTACT DETAILS & BOOKING ENQUIRY FORM */}
