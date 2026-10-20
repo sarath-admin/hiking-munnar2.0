@@ -51,16 +51,39 @@ export default function ContactPage() {
 
   return (
     <div className="bg-[#fcfbf7] min-h-screen">
-      {/* 1. TOP HERO SECTION */}
-      <section className="relative w-full overflow-hidden bg-[#12161a] pt-24 sm:pt-28 md:pt-32 pb-2 sm:pb-4 border-b border-white/10">
-        <div className="w-full">
+      {/* 1. COMPACT HERO SECTION (Crystal-Clear Vector Typography & Sunset Mountain Hikers) */}
+      <section className="relative w-full overflow-hidden bg-[#0e1318] pt-24 sm:pt-28 md:pt-32 pb-6 sm:pb-8 md:pb-10 border-b border-white/10">
+        {/* Background Image: Sunset Mountains & Hikers on the right */}
+        <div className="absolute inset-0">
           <img
-            src="/images/contact_hero_banner_hq.png"
-            alt="Contact Us - Munnar Hiking Tours"
-            className="w-full h-[180px] sm:h-[260px] md:h-[340px] lg:h-auto max-h-[520px] object-cover object-left sm:object-center select-none"
+            src="/images/contact_hero_bg_clean_hq.png"
+            alt="Munnar Hiking Tours Sunset Mountain Ridge"
+            className="w-full h-full object-cover object-right sm:object-center select-none"
           />
+          {/* Subtle vignette/gradient for optimal contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0e1318]/90 via-transparent to-black/30 pointer-events-none" />
         </div>
-        <h1 className="sr-only">Contact Us - Munnar Hiking Tours</h1>
+
+        {/* Crisp Vector Typography Container */}
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 max-w-6xl">
+          <div className="max-w-lg">
+            {/* GET IN TOUCH Pill Badge */}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-amber-500/50 bg-black/50 backdrop-blur-md text-[#FFA94D] text-xs font-bold uppercase tracking-wider mb-2.5 shadow-sm">
+              <MapPin className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>GET IN TOUCH</span>
+            </div>
+
+            {/* Crystal-Clear Vector Title */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-2 drop-shadow-md font-sans">
+              Contact <span className="text-[#FFA94D]">Us</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-gray-200 text-xs sm:text-sm md:text-base font-medium leading-relaxed drop-shadow-sm max-w-md">
+              We'd love to hear from you. Let's plan your next adventure in Munnar!
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* 2. CONTACT DETAILS & BOOKING ENQUIRY FORM */}
