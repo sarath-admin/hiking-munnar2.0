@@ -27,7 +27,7 @@ export default function TravelPhotoJournal({
       id="photo-journal"
       className={`relative w-full overflow-hidden ${
         theme === 'light'
-          ? 'bg-white text-stone-900 border-b border-[#eae4d7]'
+          ? 'bg-[#fcfbf7] text-stone-900 border-b border-[#eae4d7]'
           : 'bg-[radial-gradient(ellipse_at_top,_#122244_0%,_#0a1428_45%,_#040714_100%)] text-white border-b border-white/10'
       } ${
         isTopPosition ? 'pt-24 sm:pt-28 md:pt-32' : 'pt-8'
