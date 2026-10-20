@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
+import TravelPhotoJournal from '@/components/journal/TravelPhotoJournal';
 import MediaGallery from '@/components/MediaGallery';
 
 export const metadata: Metadata = {
@@ -12,7 +13,10 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <div className="min-h-screen bg-[#fcfbf7] pt-28 md:pt-36">
+    <div className="min-h-screen bg-[#fcfbf7]">
+      {/* 3D Photobook / Coverflow Carousel (Top Position) */}
+      <TravelPhotoJournal isTopPosition={true} />
+
       {/* Media Gallery Component */}
       <MediaGallery />
 

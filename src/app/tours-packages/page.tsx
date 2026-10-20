@@ -1,8 +1,7 @@
 import React from 'react';
 import PackagesShowcase from '@/components/PackagesShowcase';
-import TravelPhotoJournal from '@/components/journal/TravelPhotoJournal';
 import Link from 'next/link';
-import { ShieldCheck, Compass, HeartHandshake, Award } from 'lucide-react';
+import { ShieldCheck, Compass, HeartHandshake, Award, ArrowRight } from 'lucide-react';
 
 export const metadata = {
   title: 'Tour Packages – Munnar | Munnar Hiking Tours',
@@ -43,8 +42,18 @@ export default function ToursPackagesPage() {
         </div>
       </section>
 
-      {/* 3D TRAVEL PHOTO JOURNAL */}
-      <TravelPhotoJournal />
+      {/* LINK TO MEDIA GALLERY */}
+      <section className="py-12 bg-gradient-to-r from-emerald-950/40 via-zinc-900 to-emerald-950/40 border-t border-b border-white/10 text-center">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <p className="text-gray-400 text-sm mb-2">Want to see real photos and videos from these trails?</p>
+          <Link
+            href="/gallery"
+            className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-bold text-sm tracking-wide transition-colors group"
+          >
+            Explore the 3D Visual Gallery <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </section>
 
 
       {/* WHY BOOK DIRECTLY WITH MUNNAR HIKING TOURS */}

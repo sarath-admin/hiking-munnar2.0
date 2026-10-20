@@ -12,6 +12,7 @@ interface Journal3DCarouselProps {
   onOpenLightbox: (photo: JournalPhoto) => void;
   isPlaying: boolean;
   onTogglePlay?: () => void;
+  theme?: 'light' | 'dark';
 }
 
 export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
@@ -20,6 +21,7 @@ export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
   onChangeIndex,
   onOpenLightbox,
   isPlaying,
+  theme = 'light',
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -111,8 +113,10 @@ export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
       style={{ perspective: '1400px' }}
       aria-label="3D Travel Photo Journal Carousel"
     >
-      {/* Background Soft Ambient Light */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background Soft Ambient Light (Dark mode only) */}
+      {theme === 'dark' && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none" />
+      )}
 
       {/* Main 3D Card Stage */}
       <div
@@ -131,7 +135,7 @@ export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
           // Left cards tilt rightwards (+deg), Right cards tilt leftwards (-deg)
           const rotateY = offset === 0 ? 0 : offset < 0 ? 16 + absOffset * 2 : -(16 + absOffset * 2);
           const zIndex = 40 - absOffset;
-          const opacity = isCenter ? 1 : Math.max(0.3, 1 - absOffset * 0.16);
+          const opacity = isCenter ? 1 : Math.max(0.35, 1 - absOffset * 0.16);
 
           return (
             <motion.div
@@ -166,7 +170,7 @@ export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
                 }
               }}
               className={`absolute top-0 bottom-0 m-auto cursor-pointer flex flex-col justify-center items-center ${
-                isCenter ? 'cursor-zoom-in' : 'cursor-pointer hover:brightness-110'
+                isCenter ? 'cursor-zoom-in' : 'cursor-pointer hover:brightness-105'
               }`}
               style={{
                 zIndex,
@@ -178,9 +182,13 @@ export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
               {/* Photo Card Container */}
               <div
                 className={`relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 ${
-                  isCenter
-                    ? 'border border-white/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.08)] ring-1 ring-white/20'
-                    : 'border border-white/10 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.8)]'
+                  theme === 'light'
+                    ? isCenter
+                      ? 'border border-stone-300 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.22),0_8px_20px_rgba(0,0,0,0.08)] ring-1 ring-black/5'
+                      : 'border border-stone-200/80 shadow-[0_15px_30px_-5px_rgba(0,0,0,0.12),0_4px_10px_rgba(0,0,0,0.04)]'
+                    : isCenter
+                      ? 'border border-white/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_25px_rgba(255,255,255,0.08)] ring-1 ring-white/20'
+                      : 'border border-white/10 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.8)]'
                 }`}
               >
                 {/* Image */}
@@ -217,7 +225,9 @@ export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
               {/* Realistic Floor Reflection / Soft Shadow underneath */}
               {isCenter && (
                 <div
-                  className="absolute -bottom-8 w-4/5 h-6 bg-black/70 rounded-full blur-xl pointer-events-none"
+                  className={`absolute -bottom-8 w-4/5 h-6 rounded-full blur-xl pointer-events-none ${
+                    theme === 'light' ? 'bg-black/20' : 'bg-black/70'
+                  }`}
                   style={{ transform: 'rotateX(80deg)' }}
                 />
               )}
@@ -231,7 +241,11 @@ export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
         type="button"
         onClick={prevSlide}
         aria-label="Previous Page"
-        className="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full border border-white/20 bg-white/10 hover:bg-white/25 backdrop-blur-md items-center justify-center text-white transition-all duration-200 active:scale-95 shadow-lg opacity-70 hover:opacity-100"
+        className={`hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full items-center justify-center transition-all duration-200 active:scale-95 shadow-lg ${
+          theme === 'light'
+            ? 'border border-stone-200 bg-white/90 hover:bg-white text-stone-700 hover:text-stone-900 shadow-[0_4px_16px_rgba(0,0,0,0.12)]'
+            : 'border border-white/20 bg-white/10 hover:bg-white/25 backdrop-blur-md text-white opacity-70 hover:opacity-100'
+        }`}
       >
         <ChevronLeft className="w-6 h-6 stroke-[2]" />
       </button>
@@ -240,14 +254,20 @@ export const Journal3DCarousel: React.FC<Journal3DCarouselProps> = ({
         type="button"
         onClick={nextSlide}
         aria-label="Next Page"
-        className="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full border border-white/20 bg-white/10 hover:bg-white/25 backdrop-blur-md items-center justify-center text-white transition-all duration-200 active:scale-95 shadow-lg opacity-70 hover:opacity-100"
+        className={`hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full items-center justify-center transition-all duration-200 active:scale-95 shadow-lg ${
+          theme === 'light'
+            ? 'border border-stone-200 bg-white/90 hover:bg-white text-stone-700 hover:text-stone-900 shadow-[0_4px_16px_rgba(0,0,0,0.12)]'
+            : 'border border-white/20 bg-white/10 hover:bg-white/25 backdrop-blur-md text-white opacity-70 hover:opacity-100'
+        }`}
       >
         <ChevronRight className="w-6 h-6 stroke-[2]" />
       </button>
 
       {/* Subdued page indicator indicator bar */}
       <div className="mt-4 flex items-center gap-1.5 z-20">
-        <span className="text-white/60 text-xs font-mono tracking-wider">
+        <span className={`text-xs font-mono tracking-wider ${
+          theme === 'light' ? 'text-stone-500' : 'text-white/60'
+        }`}>
           {String(currentIndex + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
         </span>
       </div>
