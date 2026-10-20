@@ -105,7 +105,7 @@ interface GoogleReviewsSliderProps {
 }
 
 export default function GoogleReviewsSlider({
-  googleProfileUrl = 'https://share.google/JM98ucOrBPm8rYWLr',
+  googleProfileUrl = 'https://www.google.com/search?client=ms-android-oneplus-terr1-rso2&hs=AGBW&sca_esv=81ee190d3896ba19&sxsrf=APpeQnvy-VaMQ5f9lcszywa3MRwvjHixsg:1792478722265&kgmid=/g/11tk33_snl&q=Munnar+Hiking+Trails&shem=dlvs1,epsd1,ltae,rimspwouoe&shndl=30&source=sh/x/loc/uni/m1/2&kgs=a097737dee9eb764&utm_source=dlvs1,epsd1,ltae,rimspwouoe,sh/x/loc/uni/m1/2',
 }: GoogleReviewsSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -147,10 +147,10 @@ export default function GoogleReviewsSlider({
             </h2>
           </div>
 
-          {/* 4.9/5.0 Rating Badge */}
+          {/* 5.0/5.0 Rating Badge */}
           <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl border border-stone-200 shadow-sm">
             <span className="font-extrabold text-2xl text-stone-900 font-sans tracking-tight">
-              4.9/5.0
+              5.0/5.0
             </span>
             <div className="flex text-amber-400 gap-0.5">
               {[...Array(5)].map((_, i) => (

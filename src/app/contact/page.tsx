@@ -1,7 +1,7 @@
 import React from 'react';
 import BookingForm from '@/components/BookingForm';
 import GoogleReviewsSlider from '@/components/GoogleReviewsSlider';
-import { MapPin, Phone, Mail, Clock, MessageSquare, Globe, ArrowRight } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageSquare, Star, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export const metadata = {
   title: 'Contact Us | Munnar Hiking Tours',
@@ -46,8 +46,8 @@ function GoogleMapsIcon({ className = 'w-5 h-5' }: { className?: string }) {
 export default function ContactPage() {
   const contactNumber = process.env.NEXT_PUBLIC_CONTACT_NUMBER || '+919496520787';
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919496520787';
-  const googleProfileUrl = 'https://share.google/JM98ucOrBPm8rYWLr';
-  const websiteUrl = 'https://brown-stingray-952964.hostingersite.com/';
+  const googleProfileUrl =
+    'https://www.google.com/search?client=ms-android-oneplus-terr1-rso2&hs=AGBW&sca_esv=81ee190d3896ba19&sxsrf=APpeQnvy-VaMQ5f9lcszywa3MRwvjHixsg:1792478722265&kgmid=/g/11tk33_snl&q=Munnar+Hiking+Trails&shem=dlvs1,epsd1,ltae,rimspwouoe&shndl=30&source=sh/x/loc/uni/m1/2&kgs=a097737dee9eb764&utm_source=dlvs1,epsd1,ltae,rimspwouoe,sh/x/loc/uni/m1/2';
 
   return (
     <div className="bg-[#fcfbf7] min-h-screen">
@@ -89,28 +89,41 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
-            {/* Left Column: Website & Google Actions */}
+            {/* Left Column: Official Google Business Actions */}
             <div className="lg:col-span-5 bg-[#161b20] p-6 sm:p-8 rounded-3xl border border-white/10 shadow-xl flex flex-col justify-between space-y-6">
-              {/* Website Info Box */}
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-black/30 border border-white/5">
-                <div className="w-12 h-12 rounded-full bg-[#ff7a00] text-white flex items-center justify-center shrink-0 shadow-md">
-                  <Globe className="w-6 h-6" />
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center p-1">
+                    <GoogleIcon className="w-full h-full" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">
+                    Google Business Profile
+                  </span>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Website</p>
-                  <a
-                    href={websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:text-[#FFA94D] text-xs sm:text-sm font-medium truncate block underline decoration-white/30 transition-colors"
-                  >
-                    {websiteUrl}
-                  </a>
+
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+                  Munnar Hiking Trails
+                </h2>
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
+                  Official verified Google Maps listing for guided sunrise trekking, jeep safaris, and cloud bed peak expeditions in Munnar.
+                </p>
+
+                {/* 5.0 Star Rating Badge */}
+                <div className="inline-flex items-center gap-3 bg-black/40 px-4 py-2.5 rounded-2xl border border-white/10 shadow-sm">
+                  <span className="text-xl font-extrabold text-white">5.0/5.0</span>
+                  <div className="flex text-amber-400 gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={16} fill="currentColor" strokeWidth={0} />
+                    ))}
+                  </div>
+                  <span className="text-xs text-gray-300 font-medium pl-1 border-l border-white/20">
+                    500+ Google Reviews
+                  </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-3">
+              <div className="space-y-3 pt-2">
                 {/* Find Us on Google Maps Button */}
                 <a
                   href={googleProfileUrl}
@@ -143,22 +156,32 @@ export default function ContactPage() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                <p className="text-center text-xs text-gray-400 pt-1">
-                  Official Verified Google Business Profile
-                </p>
+                <div className="flex items-center justify-center gap-2 pt-2 text-xs text-gray-400">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <span>Verified Native High-Range Trek Guides</span>
+                </div>
               </div>
             </div>
 
-            {/* Right Column: Embedded Google Map of Munnar */}
-            <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900 min-h-[320px] h-full">
+            {/* Right Column: Embedded Google Map of Munnar Hiking Trails */}
+            <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900 min-h-[340px] h-full relative group">
               <iframe
-                title="Munnar Hiking Tours Location Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62879.37682548483!2d77.03780338784848!3d10.08893333342379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0799794d099a6d%3A0x2c50ac432b450278!2sMunnar%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                className="w-full h-full min-h-[340px] border-0"
+                title="Munnar Hiking Trails Location Map"
+                src="https://maps.google.com/maps?q=Munnar+Hiking+Trails&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full min-h-[350px] border-0"
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
+              <a
+                href={googleProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-3 right-3 bg-white/95 hover:bg-white text-stone-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-md border border-stone-200 inline-flex items-center gap-1.5 transition-all opacity-90 group-hover:opacity-100"
+              >
+                <span>View on Google Search / Maps</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
             </div>
 
           </div>

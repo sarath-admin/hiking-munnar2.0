@@ -457,7 +457,7 @@ export default function Home() {
               <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--color-dark)] mt-2">Verified Summit Experiences</h2>
             </div>
             <div className="hidden md:flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-lg border border-gray-100">
-              <span className="font-bold text-xl">4.9/5.0</span>
+              <span className="font-bold text-xl">5.0/5.0</span>
               <div className="flex text-[var(--color-accent)]">
                 <Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" />
               </div>
