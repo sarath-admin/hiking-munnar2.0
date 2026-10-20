@@ -84,115 +84,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 2. GOOGLE PROFILE & MAP SECTION */}
-      <section className="py-12 md:py-16 bg-[#0e1215] border-b border-white/10 text-white">
-        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            
-            {/* Left Column: Official Google Business Actions */}
-            <div className="lg:col-span-5 bg-[#161b20] p-6 sm:p-8 rounded-3xl border border-white/10 shadow-xl flex flex-col justify-between space-y-6">
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center p-1">
-                    <GoogleIcon className="w-full h-full" />
-                  </div>
-                  <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">
-                    Google Business Profile
-                  </span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
-                  Munnar Hiking Trails
-                </h2>
-                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
-                  Official verified Google Maps listing for guided sunrise trekking, jeep safaris, and cloud bed peak expeditions in Munnar.
-                </p>
-
-                {/* 5.0 Star Rating Badge */}
-                <div className="inline-flex items-center gap-3 bg-black/40 px-4 py-2.5 rounded-2xl border border-white/10 shadow-sm">
-                  <span className="text-xl font-extrabold text-white">5.0/5.0</span>
-                  <div className="flex text-amber-400 gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={16} fill="currentColor" strokeWidth={0} />
-                    ))}
-                  </div>
-                  <span className="text-xs text-gray-300 font-medium pl-1 border-l border-white/20">
-                    500+ Google Reviews
-                  </span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="space-y-3 pt-2">
-                {/* Find Us on Google Maps Button */}
-                <a
-                  href={googleProfileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-[#ff7a00] hover:bg-[#e86f00] text-white font-bold text-sm sm:text-base py-3.5 px-6 rounded-full flex items-center justify-between shadow-lg shadow-orange-500/20 transition-all hover:scale-[1.01] active:scale-95 group"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center p-1 shrink-0">
-                      <GoogleMapsIcon className="w-full h-full" />
-                    </div>
-                    <span>Find Us on Google Maps</span>
-                  </div>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-
-                {/* Read Our Google Reviews Button */}
-                <a
-                  href={googleProfileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-zinc-900/90 hover:bg-zinc-800 text-white font-bold text-sm sm:text-base py-3.5 px-6 rounded-full border border-white/20 flex items-center justify-between shadow-md transition-all hover:scale-[1.01] active:scale-95 group"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center p-1 shrink-0">
-                      <GoogleIcon className="w-full h-full" />
-                    </div>
-                    <span>Read Our Google Reviews</span>
-                  </div>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-
-                <div className="flex items-center justify-center gap-2 pt-2 text-xs text-gray-400">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Verified Native High-Range Trek Guides</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Embedded Google Map of Munnar Hiking Trails */}
-            <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900 min-h-[340px] h-full relative group">
-              <iframe
-                title="Munnar Hiking Trails Location Map"
-                src="https://maps.google.com/maps?q=Munnar+Hiking+Trails&t=&z=14&ie=UTF8&iwloc=&output=embed"
-                className="w-full h-full min-h-[350px] border-0"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              <a
-                href={googleProfileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute bottom-3 right-3 bg-white/95 hover:bg-white text-stone-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-md border border-stone-200 inline-flex items-center gap-1.5 transition-all opacity-90 group-hover:opacity-100"
-              >
-                <span>View on Google Search / Maps</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 3. GOOGLE REVIEWS SECTION (One-by-One Slider with 5-Star Ratings) */}
-      <GoogleReviewsSlider googleProfileUrl={googleProfileUrl} />
-
-      {/* 4. CONTACT DETAILS & BOOKING ENQUIRY FORM */}
-      <section className="py-16 md:py-24 bg-[#fcfbf7]">
+      {/* 2. CONTACT DETAILS & BOOKING ENQUIRY FORM */}
+      <section className="py-16 md:py-24 bg-[#fcfbf7] border-b border-[#eae4d7]">
         <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
           <div className="text-center mb-12">
             <span className="text-[#163524] font-bold tracking-wider uppercase text-xs sm:text-sm">
@@ -304,6 +197,113 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* 3. GOOGLE PROFILE & MAP SECTION (Positioned Below Contact Section) */}
+      <section className="py-12 md:py-16 bg-[#0e1215] border-b border-white/10 text-white">
+        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* Left Column: Official Google Business Actions */}
+            <div className="lg:col-span-5 bg-[#161b20] p-6 sm:p-8 rounded-3xl border border-white/10 shadow-xl flex flex-col justify-between space-y-6">
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center p-1">
+                    <GoogleIcon className="w-full h-full" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">
+                    Google Business Profile
+                  </span>
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+                  Munnar Hiking Trails
+                </h2>
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4">
+                  Official verified Google Maps listing for guided sunrise trekking, jeep safaris, and cloud bed peak expeditions in Munnar.
+                </p>
+
+                {/* 5.0 Star Rating Badge */}
+                <div className="inline-flex items-center gap-3 bg-black/40 px-4 py-2.5 rounded-2xl border border-white/10 shadow-sm">
+                  <span className="text-xl font-extrabold text-white">5.0/5.0</span>
+                  <div className="flex text-amber-400 gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={16} fill="currentColor" strokeWidth={0} />
+                    ))}
+                  </div>
+                  <span className="text-xs text-gray-300 font-medium pl-1 border-l border-white/20">
+                    500+ Google Reviews
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-3 pt-2">
+                {/* Find Us on Google Maps Button */}
+                <a
+                  href={googleProfileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-[#ff7a00] hover:bg-[#e86f00] text-white font-bold text-sm sm:text-base py-3.5 px-6 rounded-full flex items-center justify-between shadow-lg shadow-orange-500/20 transition-all hover:scale-[1.01] active:scale-95 group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center p-1 shrink-0">
+                      <GoogleMapsIcon className="w-full h-full" />
+                    </div>
+                    <span>Find Us on Google Maps</span>
+                  </div>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                {/* Read Our Google Reviews Button */}
+                <a
+                  href={googleProfileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-zinc-900/90 hover:bg-zinc-800 text-white font-bold text-sm sm:text-base py-3.5 px-6 rounded-full border border-white/20 flex items-center justify-between shadow-md transition-all hover:scale-[1.01] active:scale-95 group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-7 h-7 bg-white rounded-full flex items-center justify-center p-1 shrink-0">
+                      <GoogleIcon className="w-full h-full" />
+                    </div>
+                    <span>Read Our Google Reviews</span>
+                  </div>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                <div className="flex items-center justify-center gap-2 pt-2 text-xs text-gray-400">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <span>Verified Native High-Range Trek Guides</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Embedded Google Map of Munnar Hiking Trails */}
+            <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900 min-h-[340px] h-full relative group">
+              <iframe
+                title="Munnar Hiking Trails Location Map"
+                src="https://maps.google.com/maps?q=Munnar+Hiking+Trails&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full min-h-[350px] border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <a
+                href={googleProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-3 right-3 bg-white/95 hover:bg-white text-stone-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-md border border-stone-200 inline-flex items-center gap-1.5 transition-all opacity-90 group-hover:opacity-100"
+              >
+                <span>View on Google Search / Maps</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4. GOOGLE REVIEWS SECTION (One-by-One Slider with 5-Star Ratings) */}
+      <GoogleReviewsSlider googleProfileUrl={googleProfileUrl} />
     </div>
   );
 }
