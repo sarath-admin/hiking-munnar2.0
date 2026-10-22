@@ -19,24 +19,74 @@ const categories = Object.keys(categoryFilterMap);
 
 const tours = [
   {
-    title: 'Kolukkumalai Sunrise Trekking Adventure',
-    slug: 'kolukkumalai-sunrise-jeep-safari',
-    category: 'JEEP SAFARIS',
-    duration: '3-6 Hours',
+    title: 'Day Trekking',
+    slug: 'day-trekking',
+    category: 'TREKKING',
+    duration: '7 Hours (07:00 AM – 02:00 PM)',
     difficulty: 'Moderate',
-    description: 'Ride rugged 4x4 trails to witness the golden sunrise at the world\'s highest organic tea plantation...',
-    imageUrl: '/images/kolukkumalai.png',
+    description: '14 K.M.S guided walk from 1550m to 2000m mountain top with fresh homemade breakfast and snacks.',
+    imageUrl: '/images/day_trekking_treks.jpg',
     isPopular: true
   },
   {
-    title: 'Full Day Mountain Hiking in Munnar',
+    title: 'Half Trekking (Top Valley)',
+    slug: 'half-day-trekking',
+    category: 'TREKKING',
+    duration: '3-4 Hours',
+    difficulty: 'Moderate',
+    description: 'Trek through Yellapatty village, evergreen Shola forest & grasslands with views of Mattupetty & Kundale Dam.',
+    imageUrl: '/images/half_trekking_treks.jpg',
+    isPopular: true
+  },
+  {
+    title: 'Soft Trekking (Tea Plantation Walk)',
+    slug: 'soft-hiking',
+    category: 'TREKKING',
+    duration: '2:30 Hours',
+    difficulty: 'Easy',
+    description: 'Gentle 2:30 hours walking tour through rolling tea plantation trails and Shola forest edges with optional tea tasting.',
+    imageUrl: '/images/soft_trekking_treks.jpg',
+    isPopular: true
+  },
+  {
+    title: 'Full Day Trekking',
     slug: 'full-day-mountain-hiking',
     category: 'TREKKING',
-    duration: '5-8 Hours',
+    duration: '7-8 Hours',
     difficulty: 'Challenging',
-    description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot...',
-    imageUrl: '/images/chokramudi.png',
-    isPopular: false
+    description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot rare blooms.',
+    imageUrl: '/images/full_day_trekking_treks.jpg',
+    isPopular: true
+  },
+  {
+    title: 'Sun Rise Trekking',
+    slug: 'sunrise-trekking',
+    category: 'TREKKING',
+    duration: '5-6 Hours',
+    difficulty: 'Moderate',
+    description: 'Chase the sun above the clouds. Trek high grasslands and feel the magic of a Munnar dawn.',
+    imageUrl: '/images/sunrise_trekking_treks.jpg',
+    isPopular: true
+  },
+  {
+    title: 'Grass Land Hiking Tours',
+    slug: 'grassland-hiking',
+    category: 'TREKKING',
+    duration: '7 Hours',
+    difficulty: 'Moderate',
+    description: 'Walk through pure nature across Neelakurinji ridges and valleys reaching a panoramic 2250m peak.',
+    imageUrl: '/images/grassland_hiking_treks.jpg',
+    isPopular: true
+  },
+  {
+    title: 'Tea Factory Visit',
+    slug: 'tea-factory-visit',
+    category: 'TEA EXPERIENCES',
+    duration: '2 Hours (10:00 AM – 12:00 PM)',
+    difficulty: 'Easy',
+    description: 'From fresh leaves to your cup: observe withering, rolling, oxidation, grading & enjoy an authentic guided tea tasting.',
+    imageUrl: '/images/tea_factory_landscape.jpg',
+    isPopular: true
   },
   {
     title: 'Tea Plantation Walk with Sunset View',

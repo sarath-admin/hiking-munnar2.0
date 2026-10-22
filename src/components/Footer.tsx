@@ -167,7 +167,7 @@ export default function Footer() {
               </div>
               <div className="text-center sm:text-left">
                 <p className="text-gray-300 font-medium text-sm">&copy; 2026 skInfoTech Solutions.</p>
-                <p className="text-gray-500 text-xs mt-0.5">Sarathkumar.k</p>
+                <p className="text-gray-400 text-xs mt-0.5">Designed &amp; Developed by <span className="text-gray-200 font-medium">Sarathkumar K</span></p>
               </div>
             </div>
           </div>

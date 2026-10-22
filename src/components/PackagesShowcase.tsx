@@ -21,15 +21,113 @@ export interface PackageItem {
 
 const CATEGORIES = [
   { key: 'all',      label: 'All Tours' },
-  { key: 'jeep',     label: 'Jeep Safaris' },
-  { key: 'trekking', label: 'Trekking Adventure' },
+  { key: 'trekking', label: 'Trekking Packages' },
   { key: 'tea',      label: 'Tea Experiences' },
-  { key: 'wildlife', label: 'Wildlife Sanctuaries' },
+  { key: 'jeep',     label: 'Jeep Safaris' },
   { key: 'sunrise',  label: 'Sunrise Points' },
+  { key: 'wildlife', label: 'Wildlife Sanctuaries' },
   { key: 'heritage', label: 'Heritage & TukTuk' },
 ];
 
 export const TOUR_PACKAGES: PackageItem[] = [
+  /* ─── 1. DAY TREKKING ─── */
+  {
+    id: 'day-trekking',
+    category: 'trekking',
+    categoryLabel: 'TREKKING',
+    title: 'Day Trekking',
+    image: '/images/packages/day_trekking_1024.jpg',
+    duration: '7 Hours (07:00 AM – 02:00 PM)',
+    difficulty: 'Moderate',
+    badge: 'MOST POPULAR',
+    description: 'Start at 1550m and summit 2000m peak with homemade breakfast. Walk through tea plantations, grasslands, rocks, coffee & cardamom estates.',
+    highlights: ['14 K.M.S walking distance', '2000m mountain summit homemade breakfast', 'Tea, grassland & rocks covering area', 'Food, water, guide & transportation included'],
+  },
+
+  /* ─── 2. HALF TREKKING ─── */
+  {
+    id: 'half-day-trekking',
+    category: 'trekking',
+    categoryLabel: 'TREKKING',
+    title: 'Half Day Trekking and Hiking Tours',
+    image: '/images/packages/half_day_trekking_v2_1024.jpg',
+    duration: '5.5 Hours (07:00 AM – 12:30 PM)',
+    difficulty: 'Moderate',
+    badge: 'BEST SELLER',
+    description: 'Start at 1550m and summit 2000m peak with homemade breakfast. 10 Kms guided walk through tea plantations, grasslands, rocks, coffee & cardamom. Minimum 2 Persons.',
+    highlights: ['10 Kms walking distance', '2000m summit homemade breakfast', 'Tea, grassland, rocks, coffee & cardamom', 'Minimum persons: 2 Nos'],
+  },
+
+  /* ─── 3. SOFT TREKKING ─── */
+  {
+    id: 'soft-hiking',
+    category: 'trekking',
+    categoryLabel: 'TREKKING',
+    title: 'Soft Hiking Tours',
+    image: '/images/packages/soft_hiking_v2_1024.jpg',
+    duration: '3 Hours (10:00 AM – 01:00 PM)',
+    difficulty: 'Easy',
+    badge: 'EASY & SCENIC',
+    description: 'Walk gently, explore deeply. 6 Kms easy walk from 1550m to 1850m mountain top with snacks break through tea plantations, grasslands & rocks. Minimum 2 Persons.',
+    highlights: ['6 Kms easy walking trail', '1850m mountain top snacks break', 'Tea plantation, grassland & rocks', 'Minimum persons: 2 Nos'],
+  },
+
+  /* ─── 4. FULL DAY TREKKING ─── */
+  {
+    id: 'full-day-mountain-hike',
+    category: 'trekking',
+    categoryLabel: 'TREKKING',
+    title: 'Full Day Trekking',
+    image: '/images/packages/full_day_trekking_hq.jpg',
+    duration: '7-8 Hours',
+    difficulty: 'Challenging',
+    badge: 'ADVENTURE',
+    description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot rare Neelakurinji blooms across Munnar ridges.',
+    highlights: ['Summit climb to 2100m', 'Native shola forest crossing', 'Homemade breakfast & lunch', 'Local expert guide'],
+  },
+
+  /* ─── 5. SUN RISE TREKKING ─── */
+  {
+    id: 'sunrise-trekking',
+    category: 'trekking',
+    categoryLabel: 'TREKKING',
+    title: 'Sun Rise Trekking',
+    image: '/images/packages/sunrise_trekking_hq.jpg',
+    duration: '5-6 Hours',
+    difficulty: 'Moderate',
+    badge: 'BEST SELLER',
+    description: 'Chase the sun above the clouds. Trek high grasslands and feel the magic of a Munnar dawn with hot mountain breakfast.',
+    highlights: ['Golden sunrise at 2400m', 'Cloud sea panoramic views', 'High grassland trails', 'Hot mountain breakfast'],
+  },
+
+  /* ─── 6. GRASS LAND HIKING TOURS ─── */
+  {
+    id: 'grassland-hiking',
+    category: 'trekking',
+    categoryLabel: 'TREKKING',
+    title: 'Grass Land Hiking Tours',
+    image: '/images/packages/grassland_hiking_hq.jpg',
+    duration: '7 Hours',
+    difficulty: 'Moderate',
+    badge: 'NATURE TRAIL',
+    description: "Walk through nature's purest beauty across Neelakurinji ridges & valleys reaching a panoramic 2250m peak.",
+    highlights: ['Neelakurinji ridge walk', '2250m peak summit', 'Juice & snack stops', 'Homemade breakfast & guide'],
+  },
+
+  /* ─── 7. TEA FACTORY VISIT ─── */
+  {
+    id: 'tea-factory-visit',
+    category: 'tea',
+    categoryLabel: 'TEA EXPERIENCES',
+    title: 'Tea Factory Visit',
+    image: '/images/packages/tea_factory_visit_hq.jpg',
+    duration: 'Approx. 2 Hours (10:00 AM – 12:00 PM)',
+    difficulty: 'Easy',
+    badge: 'MOST POPULAR',
+    description: 'From fresh leaves to your cup: observe withering, rolling, oxidation, drying, grading & enjoy an authentic guided tea tasting.',
+    highlights: ['Complete tea factory tour', 'Fresh leaf rolling & drying', 'Guided authentic tea tasting', 'Factory shop visit'],
+  },
+
   /* ─── JEEP SAFARIS ─── */
   {
     id: 'kolukkumalai-jeep',
@@ -67,79 +165,6 @@ export const TOUR_PACKAGES: PackageItem[] = [
     description: 'Scenic 12-stop 4x4 adventure across tea valleys, Idly Hills, Viripara Waterfalls, hanging bridge & Anakulam.',
     highlights: ['Shooting Point & Idly Hills', 'Viripara & Forest Waterfalls', 'Tiger Cave & Hanging Bridge', 'River Crossing & Anakulam'],
   },
-
-  /* ─── TREKKING ADVENTURE ─── */
-  {
-    id: 'full-day-mountain-hike',
-    category: 'trekking',
-    categoryLabel: 'TREKKING',
-    title: 'Full Day Mountain Hiking in Munnar',
-    image: '/images/packages/full_day_trekking_hq.jpg',
-    duration: '5-8 Hours',
-    difficulty: 'Challenging',
-    badge: 'MOST POPULAR',
-    description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot rare Neelakurinji blooms.',
-    highlights: ['Summit climb to 2100m', 'Native shola forest crossing', 'Homemade breakfast & lunch', 'Local expert guide'],
-  },
-  {
-    id: 'sunrise-trekking',
-    category: 'trekking',
-    categoryLabel: 'TREKKING',
-    title: 'Sun Rise Trekking Adventure',
-    image: '/images/packages/sunrise_trekking_hq.jpg',
-    duration: '5-6 Hours',
-    difficulty: 'Moderate',
-    badge: 'BEST SELLER',
-    description: 'Chase the sun above the clouds. Trek high grasslands and feel the magic of a Munnar dawn.',
-    highlights: ['Golden sunrise at 2400m', 'Cloud sea panoramic views', 'High grassland trails', 'Hot mountain breakfast'],
-  },
-  {
-    id: 'soft-hiking',
-    category: 'trekking',
-    categoryLabel: 'TREKKING',
-    title: 'Soft Hiking Tours',
-    image: '/images/packages/soft_hiking_hq.jpg',
-    duration: '3 Hours',
-    difficulty: 'Easy',
-    description: 'Walk gently, explore deeply. Ideal for families, couples and beginners seeking Munnar\'s rolling hills.',
-    highlights: ['Tea plantation walk', 'Scenic grassland ridges', 'Mountain top snack break', 'Suitable for all ages'],
-  },
-  {
-    id: 'half-day-trekking',
-    category: 'trekking',
-    categoryLabel: 'TREKKING',
-    title: 'Half Day Trekking & Hiking',
-    image: '/images/packages/half_day_trekking_hq.jpg',
-    duration: '5.5 Hours',
-    difficulty: 'Moderate',
-    description: 'Ascend through cardamom, coffee & tea estates to a stunning 2000m summit with fresh homemade breakfast.',
-    highlights: ['1550m to 2000m ascent', 'Estate trail variety', 'Summit breakfast', 'Vehicle return'],
-  },
-  {
-    id: 'grassland-hiking',
-    category: 'trekking',
-    categoryLabel: 'TREKKING',
-    title: 'Grass Land Hiking Tours',
-    image: '/images/packages/grassland_hiking_hq.jpg',
-    duration: '7 Hours',
-    difficulty: 'Moderate',
-    description: "Walk through nature's purest beauty across Neelakurinji ridges & valleys at 2250m peak.",
-    highlights: ['Neelakurinji ridge walk', '2250m peak summit', 'Juice & snack stops', 'Homemade breakfast'],
-  },
-
-  /* ─── TEA EXPERIENCES ─── */
-  {
-    id: 'tea-factory-visit',
-    category: 'tea',
-    categoryLabel: 'TEA EXPERIENCES',
-    title: 'Tea Factory Visit',
-    image: '/images/packages/tea_factory_visit_hq.jpg',
-    duration: 'Approx. 2 Hours (10:00 AM – 12:00 PM)',
-    difficulty: 'Easy',
-    badge: 'MOST POPULAR',
-    description: 'From fresh leaves to your cup: observe withering, rolling, oxidation, drying, grading & enjoy a guided tea tasting.',
-    highlights: ['Complete tea factory tour', 'Fresh leaf rolling & drying', 'Guided authentic tea tasting', 'Factory shop visit'],
-  },
   {
     id: 'tea-experience-program',
     category: 'tea',
@@ -164,80 +189,44 @@ export const TOUR_PACKAGES: PackageItem[] = [
     highlights: ['6km soft hike', 'Tea factory visit', 'Tasting session', 'Local guides throughout'],
   },
 
-  /* ─── WILDLIFE SANCTUARIES ─── */
-  {
-    id: 'eravikulam-wildlife',
-    category: 'wildlife',
-    categoryLabel: 'WILDLIFE',
-    title: 'Eravikulam National Park Safari',
-    image: '/images/packages/grassland_hiking_hq.jpg',
-    duration: '3-4 Hours',
-    difficulty: 'Easy',
-    badge: 'MOST POPULAR',
-    description: 'Spot the endangered Nilgiri Tahr in their natural habitat at this UNESCO-listed high-altitude sanctuary.',
-    highlights: ['Nilgiri Tahr sightings', 'High-altitude grasslands', 'Expert naturalist guide', 'UNESCO heritage site'],
-  },
-  {
-    id: 'chinnar-wildlife',
-    category: 'wildlife',
-    categoryLabel: 'WILDLIFE',
-    title: 'Chinnar Wildlife Sanctuary Trek',
-    image: '/images/packages/anakulam_jeep_safari_hq.jpg',
-    duration: '5-6 Hours',
-    difficulty: 'Moderate',
-    description: "Explore Kerala's driest sanctuary with rare giant grizzled squirrels, elephants and star tortoises.",
-    highlights: ['Rare grizzled squirrel', 'Elephant corridors', 'Star tortoise habitat', 'River crossing trails'],
-  },
-
   /* ─── SUNRISE POINTS ─── */
   {
     id: 'kolukkumalai-sunrise',
     category: 'sunrise',
     categoryLabel: 'SUNRISE POINTS',
     title: "Kolukkumalai – World's Highest Tea Estate Sunrise",
-    image: '/images/packages/sunrise_trekking_hq.jpg',
+    image: '/images/packages/kolukkumalai_sunrise_trek_1024.jpg',
     duration: '4-5 Hours',
     difficulty: 'Moderate',
     badge: 'MOST POPULAR',
     description: "Watch the sun rise over a 100-year-old colonial tea estate at 2100m — the world's highest organic tea garden.",
     highlights: ['2100m altitude sunrise', 'Colonial tea estate', 'Cloud sea panorama', '4x4 jeep adventure'],
   },
-  {
-    id: 'top-station-sunrise',
-    category: 'sunrise',
-    categoryLabel: 'SUNRISE POINTS',
-    title: 'Top Station Sunrise View Trek',
-    image: '/images/packages/grassland_hiking_hq.jpg',
-    duration: '3-4 Hours',
-    difficulty: 'Easy',
-    badge: 'SCENIC',
-    description: 'Stand at Kerala\'s highest motor road point and watch dawn break over the misty Kannan Devan Hills.',
-    highlights: ['Highest motor road point', 'Tamil Nadu border views', 'Mist-filled valleys', 'Photography perfect'],
-  },
 
   /* ─── HERITAGE & TUKTUK ─── */
   {
-    id: 'munnar-heritage-tuktuk',
+    id: 'walking-tour-tea-plantation',
     category: 'heritage',
-    categoryLabel: 'HERITAGE & TUKTUK',
-    title: 'Munnar Heritage TukTuk Town Tour',
-    image: '/images/packages/soft_hiking_hq.jpg',
-    duration: '2-3 Hours',
+    categoryLabel: 'TREKKING & TEA WALK',
+    title: 'Walking Tour in Tea Plantation',
+    image: '/images/packages/walking_tour_tea_plantation_1024.jpg',
+    duration: '2:30 Hours',
     difficulty: 'Easy',
     badge: 'MOST POPULAR',
-    description: 'Zip through colonial-era bazaars, century-old churches and hidden tea bungalows on an iconic auto-rickshaw.',
-    highlights: ['Colonial bazaar streets', 'Old tea bungalow visit', 'Local spice markets', 'British-era church stops'],
+    description: 'Walk. Breathe. Taste Nature. Approx. 5 – 6 K.M. walking tour through tea plantation trails, rolling hills, scenic views & shola forest edge. Minimum 2 Persons.',
+    highlights: ['Approx. 5 - 6 K.M. walking tour', 'Tea plantation trails & rolling hills', 'Guide support, water & tea tasting (optional)', 'Minimum persons: 2 Nos'],
   },
   {
-    id: 'estate-heritage-walk',
+    id: 'top-valley-trekking',
     category: 'heritage',
-    categoryLabel: 'HERITAGE & TUKTUK',
-    title: 'British Estate Heritage Walk',
-    image: '/images/packages/tea_and_hiking_combo_hq.jpg',
-    duration: '3 Hours',
-    difficulty: 'Easy',
-    description: 'Walk through original British plantation bungalows, century-old factory ruins and colonial archives.',
-    highlights: ['Plantation bungalow tour', 'Factory ruins exploration', 'Colonial archive visit', 'Local history stories'],
+    categoryLabel: 'TREKKING',
+    title: 'TOP VALLEY TREKKING',
+    image: '/images/packages/top_valley_trekking_1024.jpg',
+    duration: '3-4 Hours (09:00 AM Start)',
+    difficulty: 'Moderate',
+    badge: 'BEST SELLER',
+    description: 'A 3-4 hour trek from Yellapatty tea village through Shola forest and grasslands, en route to Mattupetty Dam, Echo Point and Kundale Dam. Minimum 2 Persons.',
+    highlights: ['5-6 Kms walking trail (09:00 AM start)', 'Mattupetty Dam, Echo Point & Kundale Dam', 'Packed lunch, water, refreshments & guide fee', 'Minimum persons: 2 Nos'],
   },
 ];
 
@@ -456,9 +445,8 @@ export default function PackagesShowcase({ showTitle = true, limit }: PackagesSh
                       src={pkg.image}
                       alt={`${pkg.title} - Full Official Tour Plan Flyer`}
                       fill
-                      sizes="(max-width: 640px) 340px, 400px"
-                      quality={95}
-                      className="object-contain transition-transform duration-300 group-hover/img:scale-[1.02]"
+                      unoptimized
+                      className="object-fill transition-transform duration-300 group-hover/img:scale-[1.02]"
                     />
 
                     {/* Subtle floating click/tap prompt pill that leaves flyer content fully visible */}
@@ -472,13 +460,15 @@ export default function PackagesShowcase({ showTitle = true, limit }: PackagesSh
 
                   {/* CARD BODY */}
                   <div className="p-5">
-                    <div className="flex items-center gap-3 text-[11px] text-gray-400 mb-2">
+                    <div className="flex flex-wrap items-center gap-2.5 text-[11px] text-gray-400 mb-2">
                       <span className="flex items-center gap-1">
                         <Clock size={12} className="text-emerald-400" />
                         {pkg.duration}
                       </span>
                       <span className="w-1 h-1 rounded-full bg-gray-600" />
                       <span className={`font-semibold ${difficultyColor(pkg.difficulty)}`}>{pkg.difficulty}</span>
+                      <span className="w-1 h-1 rounded-full bg-gray-600" />
+                      <span className="text-emerald-300 font-semibold">Min. 2 Persons</span>
                     </div>
                     <h3 className="text-white font-bold text-base md:text-lg leading-snug mb-2 group-hover:text-emerald-400 transition-colors line-clamp-2">
                       {pkg.title}

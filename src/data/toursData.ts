@@ -77,6 +77,350 @@ export interface TourItem {
 }
 
 export const TOURS_DATA: TourItem[] = [
+  // Day Trekking
+  {
+    id: 'day-trekking',
+    slug: 'day-trekking',
+    aliases: ['day-trek', 'munnar-day-trekking'],
+    title: 'Day Trekking',
+    subtitle: 'Walk. Explore. Experience Nature.',
+    category: 'TREKKING',
+    categorySlug: 'trekking-adventure',
+    price: '',
+    duration: '7 Hours (07:00 AM – 02:00 PM)',
+    difficulty: 'Moderate',
+    isPopular: true,
+    badge: 'MOST POPULAR',
+    imageUrl: '/images/day_trekking_hero.png',
+    galleryImages: [
+      '/images/day_trekking_hero.png',
+      '/images/day_trekking_treks.jpg',
+      '/images/meesapulimala.png',
+      '/images/chokramudi.png'
+    ],
+    shortDescription: 'Ascend from 1550m to a 2000m mountain summit through tea plantations, grasslands, rocks, and cardamom estates with homemade breakfast & snacks.',
+    overview: 'Day Trekking with Munnar Hiking Tours is a premier scenic mountain trek covering 14 K.M.S. Starting at 07:00 AM from 1550 meters elevation, the trail ascends through vibrant tea plantations, rugged grasslands, and rocky ridges to reach the 2000m mountain summit by 09:30 AM where a fresh homemade breakfast is served. The journey continues through high grasslands, coffee, and cardamom estates before stopping for homemade snacks at 1700m and returning to Munnar.',
+    highlights: [
+      '14 K.M.S guided mountain walk through pristine Western Ghats trails',
+      'Ascent from 1550m to 2000m mountain top summit',
+      'Fresh homemade breakfast & snacks served at scenic viewpoints',
+      'Covering tea plantations, high grasslands, rocks, coffee & cardamom estates',
+      'Complete tour with food, water, guide, and transportation included'
+    ],
+    summaryInfo: {
+      duration: '7 Hours · 07:00 AM – 02:00 PM',
+      distance: '14 K.M.S',
+      difficulty: 'Moderate',
+      minGroup: '2 Nos',
+      guide: 'Certified Local Mountain Guide Included',
+      pickupLocation: 'Munnar Town / Hotel Pickup'
+    },
+    itinerary: [
+      { time: '07:00 AM', activity: 'Start by walk – 1550 Mtrs (Tea plantation, Grassland and Rocks)' },
+      { time: '09:30 AM', activity: 'Top of the mountain – 2000 Mtrs. Breakfast (Home made food)' },
+      { time: '10:30 AM', activity: 'Start by walk – (Grassland, Coffee and Cardamom plantations and Tea plantation)' },
+      { time: '01:00 PM', activity: 'Snacks break (1700 Mtrs) homemade' },
+      { time: '01:20 PM', activity: 'Start walk' },
+      { time: '02:00 PM', activity: 'Back to Munnar' }
+    ],
+    inclusions: [
+      'Food (Homemade breakfast & snacks)',
+      'Fresh drinking water',
+      'Certified local mountain guide',
+      'Transportation to and from Munnar'
+    ],
+    exclusions: ['Personal trekking gear', 'Gratuities'],
+    whatToBring: [
+      'A small backpack with sunscreen',
+      'Sun hat and sunglasses',
+      'Comfortable trekking shoes with grip',
+      'Light rain jacket or poncho'
+    ],
+    safetyInfo: [
+      'Follow your guide at all times along rocky ridges and plantation paths.',
+      'Minimum 2 persons required for booking.'
+    ],
+    meetingPoint: 'Munnar Town Center / Hotel Pickup',
+    bestTimeToVisit: 'September to May for clear mountain views and comfortable walking weather.',
+    faqs: [
+      { q: 'Is breakfast included?', a: 'Yes! Fresh homemade breakfast is served at the 2000m mountain summit, followed by homemade snacks at 1700m.' },
+      { q: 'What is the total walking distance?', a: 'The total walking distance covered is 14 K.M.S.' },
+      { q: 'What is the minimum group size?', a: 'Minimum 2 persons are required.' }
+    ]
+  },
+
+  // Half Trekking (Top Valley Trek)
+  {
+    id: 'half-day-trekking',
+    slug: 'half-day-trekking',
+    aliases: ['half-trekking', 'top-valley-trekking', 'top-valley-trek'],
+    title: 'Half Trekking (Top Valley)',
+    subtitle: 'Explore Wild Trails. Discover Endless Views.',
+    category: 'TREKKING',
+    categorySlug: 'trekking-adventure',
+    price: '',
+    duration: '3–4 Hours (09:00 AM Start)',
+    difficulty: 'Moderate',
+    isPopular: true,
+    badge: 'BEST SELLER',
+    imageUrl: '/images/half_day_trekking_landscape.jpg',
+    galleryImages: [
+      '/images/half_day_trekking_landscape.jpg',
+      '/images/half_trekking_treks.jpg',
+      '/images/slide3.jpg'
+    ],
+    shortDescription: 'A 3-4 hour trek from Yellapatty tea village through evergreen Shola forest and grasslands, en route to Mattupetty Dam, Echo Point and Kundale Dam.',
+    overview: 'This journey starts at Yellapatty tea estate village and leads through evergreen Shola forest, grasslands and ridges of the Western Ghats. Enjoy extraordinary views of valleys with tea plantations and floating white clouds. En-route sightseeing at Mattupetty Dam, Echo-Point and Kundale Dam.',
+    highlights: [
+      'Scenic 5-6 km trail through Yellapatty tea estate village & Shola forests',
+      'Extraordinary views of Western Ghats valleys and floating white clouds',
+      'En-route drive through Mattupetty Dam, View of Echo Point, and Kundale Dam',
+      'Packed lunch, water, refreshments, and guide fee included'
+    ],
+    summaryInfo: {
+      duration: '3–4 Hours · Starts at 09:00 AM',
+      distance: '5–6 Kms (Commuting distance 26 Km each way)',
+      difficulty: 'Moderate',
+      minGroup: '2 Persons',
+      guide: 'Certified Local Guide Included',
+      pickupLocation: 'Munnar Town / Yellapatty Estate'
+    },
+    itinerary: [
+      { time: '09:00 AM', activity: 'Commute from Munnar towards Yellapatty Estate (26 Km) with drive through Mattupetty Dam' },
+      { time: '10:00 AM', activity: 'Begin trek through Yellapatty tea village, evergreen Shola forest & grassland ridges' },
+      { time: '11:30 AM', activity: 'Enjoy valley viewpoint overlooking Echo Point, tea slopes, and floating clouds' },
+      { time: '01:00 PM', activity: 'Packed lunch and refreshments amidst Western Ghats ridges' },
+      { time: '01:30 PM', activity: 'Sightseeing stop at Kundale Dam and return drive to Munnar' }
+    ],
+    inclusions: [
+      'All entrance fees',
+      'Packed lunch, water & refreshments',
+      'Guide fee',
+      'Sightseeing at Mattupetty Dam, Echo Point & Kundale Dam'
+    ],
+    exclusions: ['Personal expenses', 'Gratuities'],
+    whatToBring: [
+      'Trekking shoes and comfortable trekking suit',
+      'Hat, sunscreen, and sunglasses',
+      'Trekking pole and small shoulder bag'
+    ],
+    safetyInfo: [
+      'Moderate physical fitness required. Not wheelchair accessible.'
+    ],
+    meetingPoint: 'Munnar Town Center / Hotel Pickup',
+    bestTimeToVisit: 'Year-round, with October to April providing crystal-clear valley views.',
+    faqs: [
+      { q: 'Is lunch included?', a: 'Yes, packed lunch, water, and refreshments are all included.' },
+      { q: 'Are sightseeing spots covered?', a: 'Yes! Mattupetty Dam, Echo Point, and Kundale Dam are covered en-route.' }
+    ]
+  },
+
+  // Soft Trekking (Tea Plantation Walk)
+  {
+    id: 'soft-hiking',
+    slug: 'soft-hiking',
+    aliases: ['soft-trekking', 'tea-plantation-walking-tour'],
+    title: 'Soft Trekking (Tea Plantation Walk)',
+    subtitle: 'Walk. Breathe. Taste Nature.',
+    category: 'TREKKING',
+    categorySlug: 'trekking-adventure',
+    price: '',
+    duration: '2:30 Hours Walking Tour',
+    difficulty: 'Easy',
+    isPopular: true,
+    badge: 'EASY & SCENIC',
+    imageUrl: '/images/soft_trekking_landscape.jpg',
+    galleryImages: [
+      '/images/soft_trekking_landscape.jpg',
+      '/images/soft_trekking_treks.jpg',
+      '/images/tea_walk.png'
+    ],
+    shortDescription: 'Gentle 2:30 hours walking tour through rolling tea plantation trails, scenic views, and Shola forest edges with optional tea tasting.',
+    overview: 'Experience the real Munnar with our 2:30 Hours Soft Trekking Walking Tour in Tea Plantation. Meander along private tea trails winding through rolling emerald hills, panoramic scenic viewpoints, and the edge of native Shola forests. Learn about the art of tea cultivation and plucking from native guides, and conclude with an optional authentic tea tasting session.',
+    highlights: [
+      'Gentle 5–6 km walking tour through historic tea plantation trails',
+      'Breathtaking rolling landscape views and photo opportunities',
+      'Learn about tea plucking, sorting, and estate history from local guides',
+      'Optional authentic tea tasting experience'
+    ],
+    summaryInfo: {
+      duration: '2:30 Hours (Walking Tour)',
+      distance: 'Approx. 5–6 K.M.',
+      difficulty: 'Easy',
+      minGroup: '2 Nos',
+      guide: 'Local Tea Expert & Trek Guide Included',
+      pickupLocation: 'Munnar Town / Tea Estate Gate'
+    },
+    itinerary: [
+      { time: '09:00 AM', activity: 'Meet guide at designated tea plantation entry trail' },
+      { time: '09:15 AM', activity: 'Guided walk through rolling tea bushes, learning artisan plucking techniques' },
+      { time: '10:15 AM', activity: 'Scenic panoramic viewpoint break on the Shola forest edge for photos' },
+      { time: '11:00 AM', activity: 'Optional tea tasting session and interaction with local tea experts' },
+      { time: '11:30 AM', activity: 'Conclude walking tour with memorable photos' }
+    ],
+    inclusions: [
+      'Certified local guide support',
+      'Drinking water',
+      'Tea tasting (optional)',
+      'Local insights into tea history'
+    ],
+    exclusions: ['Personal transport', 'Gratuities'],
+    whatToBring: [
+      'Comfortable walking shoes',
+      'Hat, sunglasses, and sunscreen',
+      'Personal water bottle and camera'
+    ],
+    safetyInfo: [
+      'Easy terrain suitable for families, beginners, and photography enthusiasts.'
+    ],
+    meetingPoint: 'Munnar Base Office / Designated Tea Estate Trailhead',
+    bestTimeToVisit: 'Pleasant year-round, especially morning hours.',
+    faqs: [
+      { q: 'Is this tour suitable for beginners and families?', a: 'Yes! It is an easy, gentle walk designed for all age groups.' },
+      { q: 'Is tea tasting included?', a: 'Yes, an optional tea tasting session is included.' }
+    ]
+  },
+
+  // Sun Rise Trekking
+  {
+    id: 'sunrise-trekking',
+    slug: 'sunrise-trekking',
+    aliases: ['sun-rise-trekking', 'sunrise-trek', 'munnar-sunrise-trekking'],
+    title: 'Sun Rise Trekking',
+    subtitle: 'Chase the Sun. Feel the Magic.',
+    category: 'TREKKING',
+    categorySlug: 'trekking-adventure',
+    price: '',
+    duration: '6 Hours (05:30 AM – 11:30 AM)',
+    difficulty: 'Moderate',
+    isPopular: true,
+    badge: 'MOST POPULAR',
+    imageUrl: '/images/sunrise_trekking_landscape.jpg',
+    galleryImages: [
+      '/images/sunrise_trekking_landscape.jpg',
+      '/images/sunrise_trekking_treks.jpg',
+      '/images/kolukkumalai_sunrise_view.jpg',
+      '/images/hero_scenic_sunrise.jpg'
+    ],
+    shortDescription: 'Chase the sun above the clouds. Trek 10 Kms across tea plantations, high grasslands and rocky peaks to 2400m with homemade mountain breakfast.',
+    overview: 'Chase the sun and feel the magic of a Munnar dawn on our guided Sun Rise Trekking adventure. Starting at 05:30 AM from 1550 meters by drive to the 1750m base point, witness a golden sunrise at 06:15 AM before ascending through scenic grasslands, tea plantations, and rocky ridges to reach the 2400-meter mountain summit by 08:30 AM. Enjoy a fresh homemade breakfast above the clouds before descending along the scenic ridge trail back to your hotel by 11:30 AM.',
+    highlights: [
+      'Spectacular golden sunrise view at 06:15 AM from high-altitude ridges',
+      '10 Kms guided mountain trek reaching a 2400m mountain summit',
+      'Covering scenic tea plantations, high-altitude grasslands, and rocky trails',
+      'Fresh homemade breakfast served at the 2400m summit viewpoint',
+      'Complete package including food, water, certified guide, and transportation'
+    ],
+    summaryInfo: {
+      duration: '6 Hours · 05:30 AM – 11:30 AM',
+      distance: '10 Kms (Tea plantation, Grassland and Rocks)',
+      difficulty: 'Moderate',
+      minGroup: '2 Persons (2 Nos)',
+      guide: 'Certified Local Mountain Guide Included',
+      pickupLocation: 'Munnar Town / Hotel Pickup & Drop Included'
+    },
+    itinerary: [
+      { time: '05:30 AM', activity: 'Start by drive – 1550 Mtrs.' },
+      { time: '06:00 AM', activity: 'Get the basement (1750 Mtrs)' },
+      { time: '06:15 AM', activity: 'Sunrise. Then start walk (Grass lands and rocks)' },
+      { time: '08:30 AM', activity: 'Top of the mountain (2400 Mtrs) – Break fast (Homemade food)' },
+      { time: '09:30 AM', activity: 'Start walk same way down' },
+      { time: '11:00 AM', activity: 'Get the basement (1750 Mtrs)' },
+      { time: '11:10 AM', activity: 'Back to drive' },
+      { time: '11:30 AM', activity: 'Get the hotel' }
+    ],
+    inclusions: [
+      'Food (Homemade mountain breakfast)',
+      'Fresh drinking water',
+      'Certified local mountain guide',
+      'Transportation (Drive to/from base point & hotel drop)'
+    ],
+    exclusions: ['Personal trekking gear', 'Gratuities'],
+    whatToBring: [
+      'A small back pack with some sun cream is essential',
+      'You may also wish to bring a sun hat',
+      'Comfortable trekking shoes with good grip',
+      'Warm jacket or fleece for the early morning start'
+    ],
+    safetyInfo: [
+      'Follow your mountain guide along high-altitude grassland and rock trails.',
+      'Minimum 2 persons (2 Nos) required for booking.'
+    ],
+    meetingPoint: 'Munnar Town Center / Direct Hotel Pickup at 05:30 AM',
+    bestTimeToVisit: 'September to May for crisp dawn skies and golden cloud-bed sunrises.',
+    faqs: [
+      { q: 'What is the total walking distance?', a: 'The total distance covered by walk is 10 Kms across tea plantations, grasslands, and rocks.' },
+      { q: 'What is included in the Sun Rise Trekking trip?', a: 'The trip includes homemade breakfast food, drinking water, a certified guide, and transportation.' },
+      { q: 'What is the minimum number of persons required?', a: 'Minimum 2 persons (2 Nos) are required.' }
+    ]
+  },
+
+  // Grass Land Hiking Tours
+  {
+    id: 'grassland-hiking',
+    slug: 'grassland-hiking',
+    aliases: ['grass-land-hiking-tours', 'grassland-hike'],
+    title: 'Grass Land Hiking Tours',
+    subtitle: 'Walk Through Nature’s Purest Beauty',
+    category: 'TREKKING',
+    categorySlug: 'trekking-adventure',
+    price: '',
+    duration: '7 Hours',
+    difficulty: 'Moderate',
+    isPopular: true,
+    badge: 'NATURE TRAIL',
+    imageUrl: '/images/letchmi_trek.jpg',
+    galleryImages: [
+      '/images/letchmi_trek.jpg',
+      '/images/grassland_hiking_treks.jpg',
+      '/images/anaimudi_view.jpg'
+    ],
+    shortDescription: 'Walk through nature\'s purest beauty across Neelakurinji ridges and valleys reaching a panoramic 2250m peak.',
+    overview: 'The Grass Land Hiking Tour takes you across Munnar\'s most breathtaking montane ridges and Neelakurinji flower valleys. Scaling up to a 2250m panoramic peak, this 7-hour guided trek traverses wind-swept grassland ridges, native shola clusters, and offers 360-degree vistas across the Western Ghats.',
+    highlights: [
+      'Neelakurinji ridge walk with spectacular mountain panoramas',
+      'Summit a scenic 2250m peak viewpoint',
+      'Refreshing juice and snack stops on the trail',
+      'Homemade breakfast, fresh water, and expert mountain guide'
+    ],
+    summaryInfo: {
+      duration: '7 Hours',
+      distance: '10–12 Kms',
+      difficulty: 'Moderate',
+      minGroup: '2 Nos',
+      guide: 'Native Mountain Guide Included',
+      pickupLocation: 'Munnar Town Center'
+    },
+    itinerary: [
+      { time: '07:30 AM', activity: 'Pickup and briefing at Munnar trailhead' },
+      { time: '08:00 AM', activity: 'Ascent through montane grasslands and valley ridges' },
+      { time: '10:00 AM', activity: 'Summit 2250m peak; enjoy homemade breakfast and 360° views' },
+      { time: '11:30 AM', activity: 'Ridge walk through Neelakurinji habitat and shola forest margins' },
+      { time: '01:00 PM', activity: 'Juice, snacks, and rest at high viewpoint' },
+      { time: '02:30 PM', activity: 'Descent and return to Munnar' }
+    ],
+    inclusions: [
+      'Certified local mountain guide',
+      'Homemade mountain breakfast & trail snacks',
+      'Juice and drinking water',
+      'Forest department trail passes'
+    ],
+    exclusions: ['Personal gear', 'Gratuities'],
+    whatToBring: [
+      'Trekking shoes with good traction',
+      'Sun hat, sunscreen, and light jacket',
+      'Small daypack and camera'
+    ],
+    safetyInfo: [
+      'Moderate fitness required. Ridge trails have some exposed windswept sections.'
+    ],
+    meetingPoint: 'Munnar Town Base Office',
+    bestTimeToVisit: 'September to April for crystal-clear skies and pleasant temperatures.',
+    faqs: [
+      { q: 'What is the peak altitude reached?', a: 'The trek reaches an elevation of approximately 2250 meters.' },
+      { q: 'Is food provided?', a: 'Yes, homemade breakfast, snacks, and fresh juice are provided.' }
+    ]
+  },
   // 1. Anakulam Wild Elephant & Forest Jeep Safari
   {
     id: 'anakulam-jeep-safari',
@@ -109,7 +453,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: 'Full Day · Approx. 8:30 AM – 5:00 PM',
       distance: '65 km total round trip in 4x4 Jeep',
       difficulty: 'Moderate off-road adventure',
-      minGroup: '1 Jeep (up to 6 guests)',
+      minGroup: '2 Jeep (up to 6 guests)',
       guide: 'Certified Local 4x4 Driver-Guide',
       pickupLocation: 'Munnar Hotel Pickup'
     },
@@ -171,7 +515,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: 'Approx. 4–5 hours · Early morning departure',
       distance: '15 km off-road jeep trail + 2 km scenic ridge walk',
       difficulty: 'Moderate · Bumpy off-road terrain',
-      minGroup: '3 persons (or private jeep for up to 6 guests)',
+      minGroup: '2 Jeep (up to 6 guests)',
       guide: 'Experienced local off-road driver & mountain guide',
       pickupLocation: 'Suryanelli Jeep Stand / Munnar hotel transfer available'
     },
@@ -281,7 +625,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: 'Full day · Approximately 7:00 AM – 4:30 PM',
       distance: '17 km — based on your supplied itinerary',
       difficulty: 'Moderate to Challenging · Guide recommended',
-      minGroup: '3 persons — based on your supplied itinerary',
+      minGroup: '2 Persons',
       guide: 'Certified native mountain guide included',
       pickupLocation: 'Munnar Town / Hotel pickup included'
     },
@@ -512,7 +856,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: 'Full day · Approximately 7:00 AM – 4:30 PM',
       distance: '17 km — based on your supplied itinerary',
       difficulty: 'Moderate · Guide recommended',
-      minGroup: '3 persons — based on your supplied itinerary',
+      minGroup: '2 Persons',
       guide: 'Certified native guide with emergency backup',
       pickupLocation: 'Munnar Town central pickup point'
     },
@@ -737,7 +1081,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: 'Full day, according to the selected operator\'s schedule.',
       distance: 'Approx. 15–20 km safari route + guided walking trails',
       difficulty: 'Moderate · Safari vehicle & nature walks',
-      minGroup: '2 persons (Private or small group departures)',
+      minGroup: '2 Jeep (up to 6 guests)',
       guide: 'Forest Department Guide & Native Tribal Tracker',
       pickupLocation: 'Designated Chinnar Wildlife Sanctuary entry or approved safari meeting point.'
     },
@@ -1373,7 +1717,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: '4–5 Hours · Morning or Afternoon departure',
       distance: '25 km off-road route',
       difficulty: 'Easy to Moderate',
-      minGroup: '1 Jeep (up to 6 guests)',
+      minGroup: '2 Jeep (up to 6 guests)',
       guide: 'Local 4x4 Chauffeur & Guide',
       pickupLocation: 'Munnar Town Hotel Pickup'
     },
@@ -1438,7 +1782,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: 'Approx. 8–10 hours (Full Day) or 3–5 hours (Half Day)',
       distance: '45–60 km rugged 4×4 mountain circuit',
       difficulty: 'Easy sightseeing & moderate forest off-road tracks',
-      minGroup: 'Up to 6 guests per 4×4 Jeep (Private or Shared)',
+      minGroup: '2 Jeep (up to 6 guests)',
       guide: 'Local driver-guide, confirm at booking',
       pickupLocation: 'Designated Munnar pickup point / hotel transfer'
     },
@@ -1721,7 +2065,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: '3 Hours · 07:00 PM to 10:00 PM',
       distance: '25–35 km forest & plantation night circuit',
       difficulty: 'Easy · Suitable for families, couples and all ages',
-      minGroup: '1–6 persons per 4×4 Jeep',
+      minGroup: '2 Jeep (up to 6 guests)',
       guide: 'Certified Local 4×4 Driver-Guide & Spotter',
       pickupLocation: 'Hotel Pickup across Munnar Town or designated central meeting point'
     },
@@ -2035,7 +2379,7 @@ export const TOURS_DATA: TourItem[] = [
       duration: '3–5 Hours',
       distance: 'Approx. 15 km 4×4 mountain track',
       difficulty: 'Easy to Moderate',
-      minGroup: 'Up to 6 guests per Jeep (Private or Shared)',
+      minGroup: '2 Jeep (up to 6 guests)',
       guide: 'Experienced Local 4×4 Jeep Driver & Guide',
       pickupLocation: 'Suryanelli Jeep Safari Pickup Point'
     },

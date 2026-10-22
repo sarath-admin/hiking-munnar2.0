@@ -94,15 +94,35 @@ export default function Home() {
   ];
 
   const allTours = [
-    // Top 3 from Design Reference
+    // Top Featured Trekking Packages on Frontpage
     { 
-      title: 'Anakulam Wild Elephant & Forest Jeep Safari', 
-      slug: 'anakulam-jeep-safari', 
-      duration: 'Full Day (6–8 Hours)', 
+      title: 'Day Trekking', 
+      slug: 'day-trekking', 
+      duration: '7 Hours (07:00 AM – 02:00 PM)', 
       difficulty: 'Moderate', 
-      imageUrl: '/images/anakulam_jeep_safari_landscape.jpg', 
-      category: 'JEEP SAFARIS', 
-      description: 'Explore nature with off-road 4x4 adventure, hidden waterfalls, Mankulam town, and wild elephant spotting zones at the famous Anakulam riverbank...',
+      imageUrl: '/images/day_trekking_home_v2.jpg', 
+      category: 'TREKKING', 
+      description: 'Start at 1550m and summit 2000m peak with homemade breakfast. 14 K.M.S trek through tea, grasslands & rocks.',
+      isPopular: true 
+    },
+    { 
+      title: 'Half Trekking (Top Valley)', 
+      slug: 'half-day-trekking', 
+      duration: '3–4 Hours', 
+      difficulty: 'Moderate', 
+      imageUrl: '/images/half_trekking_home_card.jpg', 
+      category: 'TREKKING', 
+      description: '3-4 hour trek from Yellapatty through Shola forest & grasslands with Mattupetty Dam, Echo Point & Kundale Dam views.',
+      isPopular: true 
+    },
+    { 
+      title: 'Soft Trekking (Tea Plantation Walk)', 
+      slug: 'soft-hiking', 
+      duration: '2:30 Hours', 
+      difficulty: 'Easy', 
+      imageUrl: '/images/soft_trekking_landscape.jpg', 
+      category: 'TREKKING', 
+      description: 'Scenic 2:30 hours walking tour through rolling tea plantation trails and Shola forest edges with optional tea tasting.',
       isPopular: true 
     },
     { 
@@ -110,23 +130,43 @@ export default function Home() {
       slug: 'full-day-mountain-hiking', 
       duration: '5-8 Hours', 
       difficulty: 'Challenging', 
-      imageUrl: '/images/meesapulimala.png', 
+      imageUrl: '/images/fullday_home_card.jpg', 
       category: 'TREKKING', 
-      description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot...',
+      description: 'Summit high-altitude grassy knolls, cross native shola forest corridors, and spot rare blooms.',
       isPopular: true 
     },
     { 
-      title: 'Tea Factory Visit', 
-      slug: 'tea-factory-visit', 
-      duration: '2 Hours (10:00 AM – 12:00 PM)', 
-      difficulty: 'Easy', 
-      imageUrl: '/images/tea_factory_landscape.jpg', 
-      category: 'TEA EXPERIENCES', 
-      description: 'From fresh leaves to your cup: explore authentic tea processing, withering, rolling, oxidation, grading & guided tea tasting.',
+      title: 'Sun Rise Trekking', 
+      slug: 'sunrise-trekking', 
+      duration: '5-6 Hours', 
+      difficulty: 'Moderate', 
+      imageUrl: '/images/sunrise_trekking_home_card.jpg', 
+      category: 'TREKKING',
+      description: 'Chase the sun above the clouds. Trek high grasslands and feel the magic of a Munnar dawn.',
+      isPopular: true
+    },
+    { 
+      title: 'Grass Land Hiking Tours', 
+      slug: 'grassland-hiking', 
+      duration: '7 Hours', 
+      difficulty: 'Moderate', 
+      imageUrl: '/images/grassland_home_card.jpg', 
+      category: 'TREKKING', 
+      description: 'Walk through pure nature across Neelakurinji ridges and valleys reaching a panoramic 2250m peak.',
       isPopular: true 
     },
     
-    // Other Jeep
+    // Jeep Safaris Category
+    { 
+      title: 'Anakulam Wild Elephant & Forest Jeep Safari', 
+      slug: 'anakulam-jeep-safari', 
+      duration: 'Full Day (6–8 Hours)', 
+      difficulty: 'Moderate', 
+      imageUrl: '/images/anakulam_jeep_safari_landscape.jpg', 
+      category: 'Jeep Safaris', 
+      description: 'Explore nature with off-road 4x4 adventure, hidden waterfalls, Mankulam town, and wild elephant spotting zones at the famous Anakulam riverbank...',
+      isPopular: false 
+    },
     { 
       title: 'Kolukkumalai Sunrise Trekking Adventure', 
       slug: 'kolukkumalai-sunrise-jeep-safari', 
@@ -139,10 +179,22 @@ export default function Home() {
     { title: 'Off-Road Waterfall Safari', slug: 'waterfall-safari', duration: 'Half Day', difficulty: 'Easy', imageUrl: '/images/safari_waterfall_v2.jpg', category: 'Jeep Safaris' },
     { title: 'Kannan Devan Hills Safari', slug: 'kannan-devan-hills-jeep-safari', duration: 'Full Day', difficulty: 'Easy', imageUrl: '/images/kannan_devan_safari_landscape.jpg', category: 'Jeep Safaris' },
     { title: 'Night Safari Adventure', slug: 'night-safari', duration: '3 Hours', difficulty: 'Easy', imageUrl: '/images/safari_night.jpg', category: 'Jeep Safaris' },
-    // Other Trekking
+
+    // Trekking Adventure Category
     { title: 'Letcmi Hills Trek', slug: 'letchmi-trek', duration: 'Half Day', difficulty: 'Moderate', imageUrl: '/images/letchmi_trek.jpg', category: 'Trekking Adventure' },
     { title: 'Anaimudi View Trek', slug: 'anaimudi-view', duration: 'Half Day', difficulty: 'Moderate', imageUrl: '/images/anaimudi_view.jpg', category: 'Trekking Adventure' },
-    // Other Tea
+
+    // Tea Experiences Category
+    { 
+      title: 'Tea Factory Visit', 
+      slug: 'tea-factory-visit', 
+      duration: '2 Hours (10:00 AM – 12:00 PM)', 
+      difficulty: 'Easy', 
+      imageUrl: '/images/tea_factory_landscape.jpg', 
+      category: 'Tea Experiences', 
+      description: 'From fresh leaves to your cup: explore authentic tea processing, withering, rolling, oxidation, grading & guided tea tasting.',
+      isPopular: false 
+    },
     { title: 'Factory Visit & Tasting', slug: 'tea-factory', duration: '2 Hours', difficulty: 'Easy', imageUrl: '/images/tea_factory_tasting.jpg', category: 'Tea Experiences' },
     { title: 'Plantation Picnic', slug: 'plantation-picnic', duration: 'Half Day', difficulty: 'Easy', imageUrl: '/images/plantation_picnic.jpg', category: 'Tea Experiences' },
     // Wildlife
@@ -173,7 +225,7 @@ export default function Home() {
           return cat === 'tea experiences';
         }
         return cat === active;
-      }).slice(0, 3);
+      });
 
   const faqs = [
     {
@@ -332,23 +384,23 @@ export default function Home() {
           onClick={() => setVideoModalOpen(false)}
         >
           <div 
-            className="relative w-full max-w-4xl bg-black rounded-3xl overflow-hidden border border-white/20 shadow-2xl aspect-video flex items-center justify-center"
+            className="relative h-[82vh] max-h-[760px] w-auto max-w-[92vw] aspect-[9/16] bg-black rounded-3xl overflow-hidden border border-white/20 shadow-2xl flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setVideoModalOpen(false)}
-              className="absolute top-4 right-4 text-white/80 hover:text-white p-2.5 rounded-full bg-black/60 hover:bg-black/90 transition-colors z-50 border border-white/10"
+              className="absolute top-3.5 right-3.5 text-white/90 hover:text-white p-2 rounded-full bg-black/60 hover:bg-black/90 transition-colors z-50 border border-white/15 backdrop-blur-sm"
               aria-label="Close video"
             >
-              <X size={22} />
+              <X size={20} />
             </button>
             <video
-              className="w-full h-full object-contain bg-black"
+              className="w-full h-full object-cover rounded-3xl bg-black"
               controls
               autoPlay
               playsInline
               preload="auto"
-              src="/videos/welcome-munnar-hiking-tours.mp4"
+              src="/videos/welcome-munnar-hiking-tours.mp4?v=2"
             >
               Your browser does not support the video tag.
             </video>
